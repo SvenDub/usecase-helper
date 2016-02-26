@@ -12,7 +12,9 @@ namespace UsecaseHelper
     public partial class MainForm : Form
     {
         private readonly List<UseCase> _useCases = new List<UseCase>();
-        private readonly List<Actor> _actors = new List<Actor>(); 
+        private readonly List<Actor> _actors = new List<Actor>();
+
+        private Actor _selectedActor;
 
         public MainForm()
         {
@@ -69,7 +71,30 @@ namespace UsecaseHelper
             }
             else if (rdiElementLine.Checked)
             {
-                
+                if (_selectedActor == null)
+                {
+                    Actor selection = _actors.Find(actor => actor.InSelection(x, y));
+                    if (selection == null)
+                    {
+                        MessageBox.Show("Select an actor");
+                    }
+                    else
+                    {
+                        _selectedActor = selection;
+                    }
+                }
+                else
+                {
+                    UseCase selection = _useCases.Find(useCase => useCase.InSelection(x, y));
+                    if (selection == null)
+                    {
+                        MessageBox.Show("Select a use case");
+                    }
+                    else
+                    {
+                        selection.Actors.Add(_selectedActor);
+                    }
+                }
             }
 
             imgDrawing.Invalidate();
