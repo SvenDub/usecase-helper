@@ -11,8 +11,8 @@ namespace UsecaseHelper
 {
     public partial class MainForm : Form
     {
-        private List<UseCase> _useCases = new List<UseCase>();
-        private List<Actor> _actors = new List<Actor>(); 
+        private readonly List<UseCase> _useCases = new List<UseCase>();
+        private readonly List<Actor> _actors = new List<Actor>(); 
 
         public MainForm()
         {
@@ -21,7 +21,8 @@ namespace UsecaseHelper
 
         private void imgDrawing_Paint(object sender, PaintEventArgs e)
         {
-            
+            _useCases.ForEach(useCase => useCase.Draw(e.Graphics));
+            _actors.ForEach(actor => actor.Draw(e.Graphics));
         }
 
         private void imgDrawing_MouseClick(object sender, MouseEventArgs e)
@@ -56,7 +57,7 @@ namespace UsecaseHelper
 
                 _useCases.Add(new UseCase()
                 {
-                    Name = useCaseForm.Name,
+                    Name = useCaseForm.CaseName,
                     X = x,
                     Y = y,
                     Assumptions = useCaseForm.Assumptions,
@@ -70,6 +71,8 @@ namespace UsecaseHelper
             {
                 
             }
+
+            imgDrawing.Invalidate();
         }
     }
 }
