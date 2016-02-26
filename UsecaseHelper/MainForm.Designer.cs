@@ -39,14 +39,14 @@
             this.rdiElementUseCase = new System.Windows.Forms.RadioButton();
             this.rdiElementActor = new System.Windows.Forms.RadioButton();
             this.pnlContent = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.imgDrawing = new System.Windows.Forms.PictureBox();
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlControls.SuspendLayout();
             this.gbxMode.SuspendLayout();
             this.gbxElement.SuspendLayout();
             this.pnlContent.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgDrawing)).BeginInit();
             this.statusBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -169,7 +169,7 @@
             // 
             // pnlContent
             // 
-            this.pnlContent.Controls.Add(this.pictureBox1);
+            this.pnlContent.Controls.Add(this.imgDrawing);
             this.pnlContent.Controls.Add(this.statusBar);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(0, 132);
@@ -177,16 +177,17 @@
             this.pnlContent.Size = new System.Drawing.Size(652, 354);
             this.pnlContent.TabIndex = 1;
             // 
-            // pictureBox1
+            // imgDrawing
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(652, 332);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.imgDrawing.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.imgDrawing.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imgDrawing.Location = new System.Drawing.Point(0, 0);
+            this.imgDrawing.Name = "imgDrawing";
+            this.imgDrawing.Size = new System.Drawing.Size(652, 332);
+            this.imgDrawing.TabIndex = 1;
+            this.imgDrawing.TabStop = false;
+            this.imgDrawing.Paint += new System.Windows.Forms.PaintEventHandler(this.imgDrawing_Paint);
+            this.imgDrawing.MouseClick += new System.Windows.Forms.MouseEventHandler(this.imgDrawing_MouseClick);
             // 
             // statusBar
             // 
@@ -221,7 +222,7 @@
             this.gbxElement.PerformLayout();
             this.pnlContent.ResumeLayout(false);
             this.pnlContent.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgDrawing)).EndInit();
             this.statusBar.ResumeLayout(false);
             this.statusBar.PerformLayout();
             this.ResumeLayout(false);
@@ -238,7 +239,7 @@
         private System.Windows.Forms.GroupBox gbxMode;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnClearAll;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox imgDrawing;
         private System.Windows.Forms.RadioButton rdiModeSelect;
         private System.Windows.Forms.RadioButton rdiModeCreate;
         private System.Windows.Forms.RadioButton rdiElementLine;
