@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace UsecaseHelper
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            
         }
     }
 }

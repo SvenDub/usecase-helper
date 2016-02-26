@@ -1,6 +1,6 @@
 ﻿namespace UsecaseHelper
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             this.pnlControls = new System.Windows.Forms.Panel();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnClearAll = new System.Windows.Forms.Button();
+            this.gbxMode = new System.Windows.Forms.GroupBox();
+            this.rdiModeSelect = new System.Windows.Forms.RadioButton();
+            this.rdiModeCreate = new System.Windows.Forms.RadioButton();
+            this.gbxElement = new System.Windows.Forms.GroupBox();
+            this.rdiElementLine = new System.Windows.Forms.RadioButton();
+            this.rdiElementUseCase = new System.Windows.Forms.RadioButton();
+            this.rdiElementActor = new System.Windows.Forms.RadioButton();
             this.pnlContent = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.gbxElement = new System.Windows.Forms.GroupBox();
-            this.gbxMode = new System.Windows.Forms.GroupBox();
-            this.btnClearAll = new System.Windows.Forms.Button();
-            this.btnRemove = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.rdiElementActor = new System.Windows.Forms.RadioButton();
-            this.rdiElementUseCase = new System.Windows.Forms.RadioButton();
-            this.rdiElementLine = new System.Windows.Forms.RadioButton();
-            this.rdiModeCreate = new System.Windows.Forms.RadioButton();
-            this.rdiModeSelect = new System.Windows.Forms.RadioButton();
             this.pnlControls.SuspendLayout();
-            this.pnlContent.SuspendLayout();
-            this.statusBar.SuspendLayout();
-            this.gbxElement.SuspendLayout();
             this.gbxMode.SuspendLayout();
+            this.gbxElement.SuspendLayout();
+            this.pnlContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.statusBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlControls
@@ -63,6 +63,110 @@
             this.pnlControls.Size = new System.Drawing.Size(652, 132);
             this.pnlControls.TabIndex = 0;
             // 
+            // btnRemove
+            // 
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemove.Location = new System.Drawing.Point(565, 41);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(75, 23);
+            this.btnRemove.TabIndex = 3;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            // 
+            // btnClearAll
+            // 
+            this.btnClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearAll.Location = new System.Drawing.Point(565, 12);
+            this.btnClearAll.Name = "btnClearAll";
+            this.btnClearAll.Size = new System.Drawing.Size(75, 23);
+            this.btnClearAll.TabIndex = 2;
+            this.btnClearAll.Text = "Clear All";
+            this.btnClearAll.UseVisualStyleBackColor = true;
+            // 
+            // gbxMode
+            // 
+            this.gbxMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbxMode.Controls.Add(this.rdiModeSelect);
+            this.gbxMode.Controls.Add(this.rdiModeCreate);
+            this.gbxMode.Location = new System.Drawing.Point(168, 12);
+            this.gbxMode.Name = "gbxMode";
+            this.gbxMode.Size = new System.Drawing.Size(150, 114);
+            this.gbxMode.TabIndex = 1;
+            this.gbxMode.TabStop = false;
+            this.gbxMode.Text = "Mode";
+            // 
+            // rdiModeSelect
+            // 
+            this.rdiModeSelect.AutoSize = true;
+            this.rdiModeSelect.Location = new System.Drawing.Point(7, 43);
+            this.rdiModeSelect.Name = "rdiModeSelect";
+            this.rdiModeSelect.Size = new System.Drawing.Size(55, 17);
+            this.rdiModeSelect.TabIndex = 1;
+            this.rdiModeSelect.TabStop = true;
+            this.rdiModeSelect.Text = "Select";
+            this.rdiModeSelect.UseVisualStyleBackColor = true;
+            // 
+            // rdiModeCreate
+            // 
+            this.rdiModeCreate.AutoSize = true;
+            this.rdiModeCreate.Checked = true;
+            this.rdiModeCreate.Location = new System.Drawing.Point(7, 20);
+            this.rdiModeCreate.Name = "rdiModeCreate";
+            this.rdiModeCreate.Size = new System.Drawing.Size(56, 17);
+            this.rdiModeCreate.TabIndex = 0;
+            this.rdiModeCreate.TabStop = true;
+            this.rdiModeCreate.Text = "Create";
+            this.rdiModeCreate.UseVisualStyleBackColor = true;
+            // 
+            // gbxElement
+            // 
+            this.gbxElement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbxElement.Controls.Add(this.rdiElementLine);
+            this.gbxElement.Controls.Add(this.rdiElementUseCase);
+            this.gbxElement.Controls.Add(this.rdiElementActor);
+            this.gbxElement.Location = new System.Drawing.Point(12, 12);
+            this.gbxElement.Name = "gbxElement";
+            this.gbxElement.Size = new System.Drawing.Size(150, 114);
+            this.gbxElement.TabIndex = 0;
+            this.gbxElement.TabStop = false;
+            this.gbxElement.Text = "Element";
+            // 
+            // rdiElementLine
+            // 
+            this.rdiElementLine.AutoSize = true;
+            this.rdiElementLine.Location = new System.Drawing.Point(6, 65);
+            this.rdiElementLine.Name = "rdiElementLine";
+            this.rdiElementLine.Size = new System.Drawing.Size(45, 17);
+            this.rdiElementLine.TabIndex = 2;
+            this.rdiElementLine.TabStop = true;
+            this.rdiElementLine.Text = "Line";
+            this.rdiElementLine.UseVisualStyleBackColor = true;
+            // 
+            // rdiElementUseCase
+            // 
+            this.rdiElementUseCase.AutoSize = true;
+            this.rdiElementUseCase.Location = new System.Drawing.Point(6, 42);
+            this.rdiElementUseCase.Name = "rdiElementUseCase";
+            this.rdiElementUseCase.Size = new System.Drawing.Size(70, 17);
+            this.rdiElementUseCase.TabIndex = 1;
+            this.rdiElementUseCase.TabStop = true;
+            this.rdiElementUseCase.Text = "Use case";
+            this.rdiElementUseCase.UseVisualStyleBackColor = true;
+            // 
+            // rdiElementActor
+            // 
+            this.rdiElementActor.AutoSize = true;
+            this.rdiElementActor.Checked = true;
+            this.rdiElementActor.Location = new System.Drawing.Point(6, 19);
+            this.rdiElementActor.Name = "rdiElementActor";
+            this.rdiElementActor.Size = new System.Drawing.Size(50, 17);
+            this.rdiElementActor.TabIndex = 0;
+            this.rdiElementActor.TabStop = true;
+            this.rdiElementActor.Text = "Actor";
+            this.rdiElementActor.UseVisualStyleBackColor = true;
+            // 
             // pnlContent
             // 
             this.pnlContent.Controls.Add(this.pictureBox1);
@@ -72,6 +176,17 @@
             this.pnlContent.Name = "pnlContent";
             this.pnlContent.Size = new System.Drawing.Size(652, 354);
             this.pnlContent.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(652, 332);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // statusBar
             // 
@@ -90,139 +205,25 @@
             this.statusBarLabel.Size = new System.Drawing.Size(83, 17);
             this.statusBarLabel.Text = "statusBarLabel";
             // 
-            // gbxElement
-            // 
-            this.gbxElement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.gbxElement.Controls.Add(this.rdiElementLine);
-            this.gbxElement.Controls.Add(this.rdiElementUseCase);
-            this.gbxElement.Controls.Add(this.rdiElementActor);
-            this.gbxElement.Location = new System.Drawing.Point(12, 12);
-            this.gbxElement.Name = "gbxElement";
-            this.gbxElement.Size = new System.Drawing.Size(150, 114);
-            this.gbxElement.TabIndex = 0;
-            this.gbxElement.TabStop = false;
-            this.gbxElement.Text = "Element";
-            // 
-            // gbxMode
-            // 
-            this.gbxMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.gbxMode.Controls.Add(this.rdiModeSelect);
-            this.gbxMode.Controls.Add(this.rdiModeCreate);
-            this.gbxMode.Location = new System.Drawing.Point(168, 12);
-            this.gbxMode.Name = "gbxMode";
-            this.gbxMode.Size = new System.Drawing.Size(150, 114);
-            this.gbxMode.TabIndex = 1;
-            this.gbxMode.TabStop = false;
-            this.gbxMode.Text = "Mode";
-            // 
-            // btnClearAll
-            // 
-            this.btnClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearAll.Location = new System.Drawing.Point(565, 12);
-            this.btnClearAll.Name = "btnClearAll";
-            this.btnClearAll.Size = new System.Drawing.Size(75, 23);
-            this.btnClearAll.TabIndex = 2;
-            this.btnClearAll.Text = "Clear All";
-            this.btnClearAll.UseVisualStyleBackColor = true;
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemove.Location = new System.Drawing.Point(565, 41);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnRemove.TabIndex = 3;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(652, 332);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
-            // rdiElementActor
-            // 
-            this.rdiElementActor.AutoSize = true;
-            this.rdiElementActor.Checked = true;
-            this.rdiElementActor.Location = new System.Drawing.Point(6, 19);
-            this.rdiElementActor.Name = "rdiElementActor";
-            this.rdiElementActor.Size = new System.Drawing.Size(50, 17);
-            this.rdiElementActor.TabIndex = 0;
-            this.rdiElementActor.TabStop = true;
-            this.rdiElementActor.Text = "Actor";
-            this.rdiElementActor.UseVisualStyleBackColor = true;
-            // 
-            // rdiElementUseCase
-            // 
-            this.rdiElementUseCase.AutoSize = true;
-            this.rdiElementUseCase.Location = new System.Drawing.Point(6, 42);
-            this.rdiElementUseCase.Name = "rdiElementUseCase";
-            this.rdiElementUseCase.Size = new System.Drawing.Size(70, 17);
-            this.rdiElementUseCase.TabIndex = 1;
-            this.rdiElementUseCase.TabStop = true;
-            this.rdiElementUseCase.Text = "Use case";
-            this.rdiElementUseCase.UseVisualStyleBackColor = true;
-            // 
-            // rdiElementLine
-            // 
-            this.rdiElementLine.AutoSize = true;
-            this.rdiElementLine.Location = new System.Drawing.Point(6, 65);
-            this.rdiElementLine.Name = "rdiElementLine";
-            this.rdiElementLine.Size = new System.Drawing.Size(45, 17);
-            this.rdiElementLine.TabIndex = 2;
-            this.rdiElementLine.TabStop = true;
-            this.rdiElementLine.Text = "Line";
-            this.rdiElementLine.UseVisualStyleBackColor = true;
-            // 
-            // rdiModeCreate
-            // 
-            this.rdiModeCreate.AutoSize = true;
-            this.rdiModeCreate.Checked = true;
-            this.rdiModeCreate.Location = new System.Drawing.Point(7, 20);
-            this.rdiModeCreate.Name = "rdiModeCreate";
-            this.rdiModeCreate.Size = new System.Drawing.Size(56, 17);
-            this.rdiModeCreate.TabIndex = 0;
-            this.rdiModeCreate.TabStop = true;
-            this.rdiModeCreate.Text = "Create";
-            this.rdiModeCreate.UseVisualStyleBackColor = true;
-            // 
-            // rdiModeSelect
-            // 
-            this.rdiModeSelect.AutoSize = true;
-            this.rdiModeSelect.Location = new System.Drawing.Point(7, 43);
-            this.rdiModeSelect.Name = "rdiModeSelect";
-            this.rdiModeSelect.Size = new System.Drawing.Size(55, 17);
-            this.rdiModeSelect.TabIndex = 1;
-            this.rdiModeSelect.TabStop = true;
-            this.rdiModeSelect.Text = "Select";
-            this.rdiModeSelect.UseVisualStyleBackColor = true;
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(652, 486);
             this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.pnlControls);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Use Case Helper";
             this.pnlControls.ResumeLayout(false);
-            this.pnlContent.ResumeLayout(false);
-            this.pnlContent.PerformLayout();
-            this.statusBar.ResumeLayout(false);
-            this.statusBar.PerformLayout();
-            this.gbxElement.ResumeLayout(false);
-            this.gbxElement.PerformLayout();
             this.gbxMode.ResumeLayout(false);
             this.gbxMode.PerformLayout();
+            this.gbxElement.ResumeLayout(false);
+            this.gbxElement.PerformLayout();
+            this.pnlContent.ResumeLayout(false);
+            this.pnlContent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.statusBar.ResumeLayout(false);
+            this.statusBar.PerformLayout();
             this.ResumeLayout(false);
 
         }
