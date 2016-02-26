@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
 namespace UsecaseHelper
@@ -13,21 +12,18 @@ namespace UsecaseHelper
         public string Exceptions { get; set; }
         public string Result { get; set; }
 
-        private readonly Pen _pen = Pens.Black;
-        private readonly Brush _brush = Brushes.Black;
-
-        public UseCase()
-        {
-            Width = 100;
-            Height = 25;
-        }
+        public override int Width => TextSize.Width + 25;
+        public override int Height => TextSize.Height + 25;
 
         public override void Draw(Graphics g)
         {
             g.DrawEllipse(_pen, X, Y, Width, Height);
-            g.DrawString(Name, new Font(FontFamily.GenericMonospace, 10), _brush, new RectangleF(X, Y + Height, 100, 50));
 
-            Actors.ForEach(actor => g.DrawLine(_pen, X, Y, actor.X, actor.Y));
+            g.DrawString(Name, _font, _brush, X + (Width / 2) - (TextSize.Width / 2), Y + (Height / 2) - (TextSize.Height / 2));
+
+            Actors.ForEach(actor => g.DrawLine(_pen, X + Width / 2, Y + Height / 2, actor.X + actor.Width / 2, actor.Y + actor.Height / 2));
+
+            base.Draw(g);
         }
     }
 }

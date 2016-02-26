@@ -11,6 +11,8 @@ namespace UsecaseHelper
 {
     public partial class MainForm : Form
     {
+        public const bool DrawBoundingBox = false;
+
         private readonly List<UseCase> _useCases = new List<UseCase>();
         private readonly List<Actor> _actors = new List<Actor>();
 
@@ -93,6 +95,7 @@ namespace UsecaseHelper
                     else
                     {
                         selection.Actors.Add(_selectedActor);
+                        _selectedActor = null;
                     }
                 }
             }

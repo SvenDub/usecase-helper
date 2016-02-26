@@ -1,22 +1,24 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace UsecaseHelper
 {
     public class Actor : Drawable
     {
-        private readonly Pen _pen = Pens.Black;
-        private readonly Brush _brush = Brushes.Black;
-
-        public Actor()
-        {
-            Width = 50;
-            Height = 100;
-        }
+        public override int Width => Math.Max(50, TextSize.Width);
+        public override int Height => 100 + 5 + TextSize.Height;
 
         public override void Draw(Graphics g)
         {
-            g.DrawRectangle(_pen, X, Y, Width, Height);
-            g.DrawString(Name, new Font(FontFamily.GenericMonospace, 10), _brush, new RectangleF(X, Y + Height, 100, 50));
+            g.DrawEllipse(_pen, X + Width / 2 - 15, Y + 10, 30, 30);
+            g.DrawLine(_pen, X + Width / 2, Y + 40, X + Width / 2, Y + 80);
+            g.DrawLine(_pen, X + Width / 2, Y + 80, X + Width / 2 + 15, Y + 100);
+            g.DrawLine(_pen, X + Width / 2, Y + 80, X + Width / 2 - 15, Y + 100);
+            g.DrawLine(_pen, X + Width / 2 - 15, Y + 50, X + Width / 2 + 15, Y + 50);
+
+            g.DrawString(Name, _font, _brush, X + (Width / 2) - (TextSize.Width / 2), Y + 100 + 5);
+
+            base.Draw(g);
         }
     }
 }
