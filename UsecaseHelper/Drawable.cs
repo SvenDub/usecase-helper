@@ -22,6 +22,8 @@ namespace UsecaseHelper
         public int Top => (int) (Y - Height/2f);
         public int Bottom => (int) (Y + Height/2f);
 
+        public bool InSelection(int x, int y) => x >= Left && x <= Right && y >= Top && y <= Bottom;
+
         public void Draw(Graphics g)
         {
             g.TranslateTransform(-Width / 2f, -Height / 2f);
@@ -38,6 +40,13 @@ namespace UsecaseHelper
 
         protected abstract void DrawSelf(Graphics g);
 
-        public bool InSelection(int x, int y) => x >= Left && x <= Right && y >= Top && y <= Bottom;
+        public virtual void Edit()
+        {
+            string name = Prompt.ShowDialog("Name:", "Edit " + Name);
+            if (!name.Equals(""))
+            {
+                Name = name;
+            }
+        }
     }
 }

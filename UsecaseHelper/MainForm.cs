@@ -103,7 +103,10 @@ namespace UsecaseHelper
 
         private void EditObject(int x, int y)
         {
-            
+            Drawable selection = _drawables.Find(drawable => drawable.InSelection(x, y));
+            selection?.Edit();
+
+            imgDrawing.Invalidate();
         }
     }
 }
