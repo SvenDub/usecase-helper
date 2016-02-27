@@ -11,7 +11,7 @@ namespace UsecaseHelper
 {
     public partial class MainForm : Form
     {
-        public const bool DrawBoundingBox = false;
+        public const bool DrawBoundingBox = true;
 
         private readonly List<UseCase> _useCases = new List<UseCase>();
         private readonly List<Actor> _actors = new List<Actor>();
@@ -25,6 +25,21 @@ namespace UsecaseHelper
 
         private void imgDrawing_Paint(object sender, PaintEventArgs e)
         {
+            for (int x = 0; x < imgDrawing.Width; x++)
+            {
+                for (int y = 0; y < imgDrawing.Height; y++)
+                {
+                    if (_actors.Find(actor => actor.InSelection(x, y)) != null)
+                    {
+                        e.Graphics.DrawEllipse(Pens.Green, x, y, 1, 1);
+                    }
+
+                    if (_useCases.Find(useCase => useCase.InSelection(x, y)) != null)
+                    {
+                        e.Graphics.DrawEllipse(Pens.Blue, x, y, 1, 1);
+                    }
+                }
+            }
             _useCases.ForEach(useCase => useCase.Draw(e.Graphics));
             _actors.ForEach(actor => actor.Draw(e.Graphics));
         }

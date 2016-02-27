@@ -17,13 +17,13 @@ namespace UsecaseHelper
 
         public override void Draw(Graphics g)
         {
+            base.Draw(g);
+
             g.DrawEllipse(_pen, X, Y, Width, Height);
 
             g.DrawString(Name, _font, _brush, X + (Width / 2) - (TextSize.Width / 2), Y + (Height / 2) - (TextSize.Height / 2));
 
-            Actors.ForEach(actor => g.DrawLine(_pen, X + Width / 2, Y + Height / 2, actor.X + actor.Width / 2, actor.Y + actor.Height / 2));
-
-            base.Draw(g);
+            Actors.ForEach(actor => g.DrawLine(_pen, X + Width / 2, Y + Height / 2, actor.X + Width/2, actor.Y + Height/2));
         }
     }
 }

@@ -15,17 +15,23 @@ namespace UsecaseHelper
         protected readonly Brush _brush = Brushes.Black;
 
         protected readonly Font _font = new Font(FontFamily.GenericMonospace, 10);
-
         protected Size TextSize => TextRenderer.MeasureText(Name, _font);
+
+        public int Left => (int) (X - Width/2f);
+        public int Right => (int) (X + Width/2f);
+        public int Top => (int) (Y - Height/2f);
+        public int Bottom => (int) (Y + Height/2f);
 
         public virtual void Draw(Graphics g)
         {
+            g.TranslateTransform(-Width / 2f, -Height / 2f);
+
             if (MainForm.DrawBoundingBox)
             {
                 g.DrawRectangle(_pen, X, Y, Width, Height);
             }
         }
 
-        public bool InSelection(int x, int y) => x >= X && x <= X + Width && y >= Y && y <= Y + Height;
+        public bool InSelection(int x, int y) => x >= Left && x <= Right && y >= Top && y <= Bottom;
     }
 }
