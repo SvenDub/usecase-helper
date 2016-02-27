@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,15 +27,20 @@ namespace UsecaseHelper
 
         private void imgDrawing_Paint(object sender, PaintEventArgs e)
         {
+            Draw(e.Graphics);
+        }
+
+        private void Draw(Graphics g)
+        {
             _drawables.ForEach(drawable =>
             {
                 if (drawable == SelectedDrawable)
                 {
-                    SelectedDrawable.DrawGhost(e.Graphics);
+                    SelectedDrawable.DrawGhost(g);
                 }
                 else
                 {
-                    drawable.Draw(e.Graphics);
+                    drawable.Draw(g);
                 }
             });
         }
@@ -201,6 +208,49 @@ namespace UsecaseHelper
             _drawables.Clear();
 
             imgDrawing.Invalidate();
+        }
+
+        private void btnExport_Click(object sender, System.EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                AddExtension = true,
+                DefaultExt = "png",
+                Filter = "Portable Network Graphics|*.png|JPEG Image|*.jpg;*.jpeg|Bitmap Image|*.bmp",
+                FileName = "Use Case"
+            };
+
+            DialogResult result = dialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                string filename = dialog.FileName;
+                ImageFormat imageFormat;
+
+                switch (dialog.FileName.Split('.').Last())
+                {
+                    default:
+                    case "png":
+                        imageFormat = ImageFormat.Png;
+                        break;
+                    case "jpg":
+                    case "jpeg":
+                        imageFormat = ImageFormat.Jpeg;
+                        break;
+                    case "bmp":
+                        imageFormat = ImageFormat.Bmp;
+                        break;
+                }
+
+                Bitmap bitmap = new Bitmap(imgDrawing.Width, imgDrawing.Height, PixelFormat.Format32bppArgb);
+                Graphics g = Graphics.FromImage(bitmap);
+
+                g.Clear(Color.White);
+
+                Draw(g);
+
+                bitmap.Save(filename, imageFormat);
+            }
         }
     }
 }

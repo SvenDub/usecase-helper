@@ -43,6 +43,7 @@
             this.statusBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.rdiModeDelete = new System.Windows.Forms.RadioButton();
             this.rdiModeUnlink = new System.Windows.Forms.RadioButton();
+            this.btnExport = new System.Windows.Forms.Button();
             this.pnlControls.SuspendLayout();
             this.gbxMode.SuspendLayout();
             this.gbxElement.SuspendLayout();
@@ -54,6 +55,7 @@
             // pnlControls
             // 
             this.pnlControls.BackColor = System.Drawing.SystemColors.Window;
+            this.pnlControls.Controls.Add(this.btnExport);
             this.pnlControls.Controls.Add(this.btnClearAll);
             this.pnlControls.Controls.Add(this.gbxMode);
             this.pnlControls.Controls.Add(this.gbxElement);
@@ -225,6 +227,16 @@
             this.rdiModeUnlink.Text = "Unlink";
             this.rdiModeUnlink.UseVisualStyleBackColor = true;
             // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(565, 41);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.TabIndex = 3;
+            this.btnExport.Text = "Export";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,6 +277,7 @@
         private System.Windows.Forms.RadioButton rdiElementActor;
         private System.Windows.Forms.RadioButton rdiModeDelete;
         private System.Windows.Forms.RadioButton rdiModeUnlink;
+        private System.Windows.Forms.Button btnExport;
     }
 }
 
