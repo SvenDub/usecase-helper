@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.pnlControls = new System.Windows.Forms.Panel();
-            this.btnRemove = new System.Windows.Forms.Button();
             this.btnClearAll = new System.Windows.Forms.Button();
             this.gbxMode = new System.Windows.Forms.GroupBox();
             this.rdiModeSelect = new System.Windows.Forms.RadioButton();
@@ -42,6 +41,7 @@
             this.imgDrawing = new System.Windows.Forms.PictureBox();
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.rdiModeDelete = new System.Windows.Forms.RadioButton();
             this.pnlControls.SuspendLayout();
             this.gbxMode.SuspendLayout();
             this.gbxElement.SuspendLayout();
@@ -53,7 +53,6 @@
             // pnlControls
             // 
             this.pnlControls.BackColor = System.Drawing.SystemColors.Window;
-            this.pnlControls.Controls.Add(this.btnRemove);
             this.pnlControls.Controls.Add(this.btnClearAll);
             this.pnlControls.Controls.Add(this.gbxMode);
             this.pnlControls.Controls.Add(this.gbxElement);
@@ -62,16 +61,6 @@
             this.pnlControls.Name = "pnlControls";
             this.pnlControls.Size = new System.Drawing.Size(652, 132);
             this.pnlControls.TabIndex = 0;
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemove.Location = new System.Drawing.Point(565, 41);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(75, 23);
-            this.btnRemove.TabIndex = 3;
-            this.btnRemove.Text = "Remove";
-            this.btnRemove.UseVisualStyleBackColor = true;
             // 
             // btnClearAll
             // 
@@ -88,6 +77,7 @@
             // 
             this.gbxMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbxMode.Controls.Add(this.rdiModeDelete);
             this.gbxMode.Controls.Add(this.rdiModeSelect);
             this.gbxMode.Controls.Add(this.rdiModeCreate);
             this.gbxMode.Location = new System.Drawing.Point(168, 12);
@@ -211,6 +201,17 @@
             this.statusBarLabel.Size = new System.Drawing.Size(83, 17);
             this.statusBarLabel.Text = "statusBarLabel";
             // 
+            // rdiModeDelete
+            // 
+            this.rdiModeDelete.AutoSize = true;
+            this.rdiModeDelete.Location = new System.Drawing.Point(7, 66);
+            this.rdiModeDelete.Name = "rdiModeDelete";
+            this.rdiModeDelete.Size = new System.Drawing.Size(56, 17);
+            this.rdiModeDelete.TabIndex = 2;
+            this.rdiModeDelete.TabStop = true;
+            this.rdiModeDelete.Text = "Delete";
+            this.rdiModeDelete.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -242,7 +243,6 @@
         private System.Windows.Forms.StatusStrip statusBar;
         private System.Windows.Forms.ToolStripStatusLabel statusBarLabel;
         private System.Windows.Forms.GroupBox gbxMode;
-        private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnClearAll;
         private System.Windows.Forms.PictureBox imgDrawing;
         private System.Windows.Forms.RadioButton rdiModeSelect;
@@ -250,6 +250,7 @@
         private System.Windows.Forms.RadioButton rdiElementLine;
         private System.Windows.Forms.RadioButton rdiElementUseCase;
         private System.Windows.Forms.RadioButton rdiElementActor;
+        private System.Windows.Forms.RadioButton rdiModeDelete;
     }
 }
 

@@ -48,6 +48,10 @@ namespace UsecaseHelper
             {
                 EditObject(e.X, e.Y);
             }
+            else if (rdiModeDelete.Checked)
+            {
+                DeleteObject(e.X, e.Y);
+            }
         }
 
         private void CreateObject(int x, int y)
@@ -116,6 +120,17 @@ namespace UsecaseHelper
         {
             Drawable selection = _drawables.Find(drawable => drawable.InSelection(x, y));
             selection?.Edit();
+
+            imgDrawing.Invalidate();
+        }
+
+        private void DeleteObject(int x, int y)
+        {
+            List<Drawable> deleteList = _drawables.FindAll(drawable => drawable.InSelection(x, y));
+
+            _drawables.FindAll(drawable => drawable is UseCase).Cast<UseCase>().ToList().ForEach(useCase => useCase.Actors.RemoveAll(actor => deleteList.Contains(actor)));
+
+            _drawables.RemoveAll(drawable => deleteList.Contains(drawable));
 
             imgDrawing.Invalidate();
         }
