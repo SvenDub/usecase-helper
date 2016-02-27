@@ -23,5 +23,27 @@ namespace UsecaseHelper
 
             Actors.ForEach(actor => g.DrawLine(_pen, X + Width / 2, Y + Height / 2, actor.X + Width/2, actor.Y + Height/2));
         }
+
+        public override void Edit()
+        {
+            UseCaseForm useCaseForm = new UseCaseForm
+            {
+                CaseName = Name,
+                Assumptions = Assumptions,
+                Description = Description,
+                Exceptions = Exceptions,
+                Result = Result,
+                Summary = Summary
+            };
+
+            useCaseForm.ShowDialog();
+
+            Name = useCaseForm.CaseName;
+            Assumptions = useCaseForm.Assumptions;
+            Description = useCaseForm.Description;
+            Exceptions = useCaseForm.Exceptions;
+            Result = useCaseForm.Result;
+            Summary = useCaseForm.Summary;
+        }
     }
 }

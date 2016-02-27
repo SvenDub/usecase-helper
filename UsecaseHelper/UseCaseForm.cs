@@ -12,12 +12,41 @@ namespace UsecaseHelper
 {
     public partial class UseCaseForm : Form
     {
-        public string CaseName => txtName.Text;
-        public string Summary => txtSummary.Text;
-        public string Assumptions => txtAssumptions.Text;
-        public string Description => txtDescription.Text;
-        public string Exceptions => txtExceptions.Text;
-        public string Result => txtResult.Text;
+        public string CaseName
+        {
+            get { return txtName.Text; }
+            set { txtName.Text = value; }
+        }
+
+        public string Summary
+        {
+            get { return txtSummary.Text; }
+            set { txtSummary.Text = value; }
+        }
+
+        public string Assumptions
+        {
+            get { return txtAssumptions.Text; }
+            set { txtAssumptions.Text = value; }
+        }
+
+        public string Description
+        {
+            get { return txtDescription.Text; }
+            set { txtDescription.Text = value; }
+        }
+
+        public string Exceptions
+        {
+            get { return txtExceptions.Text; }
+            set { txtExceptions.Text = value; }
+        }
+
+        public string Result
+        {
+            get { return txtResult.Text; }
+            set { txtResult.Text = value; }
+        }
 
         public UseCaseForm()
         {
