@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -211,12 +212,35 @@ namespace UsecaseHelper
 
         private void btnExport_Click(object sender, System.EventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog();
+            SaveFileDialog dialog = new SaveFileDialog
+            {
+                AddExtension = true,
+                DefaultExt = "png",
+                Filter = "Portable Network Graphics|*.png|JPEG Image|*.jpg;*.jpeg|Bitmap Image|*.bmp",
+                FileName = "Use Case"
+            };
+
             DialogResult result = dialog.ShowDialog();
 
             if (result == DialogResult.OK)
             {
                 string filename = dialog.FileName;
+                ImageFormat imageFormat;
+
+                switch (dialog.FileName.Split('.').Last())
+                {
+                    default:
+                    case "png":
+                        imageFormat = ImageFormat.Png;
+                        break;
+                    case "jpg":
+                    case "jpeg":
+                        imageFormat = ImageFormat.Jpeg;
+                        break;
+                    case "bmp":
+                        imageFormat = ImageFormat.Bmp;
+                        break;
+                }
 
                 Bitmap bitmap = new Bitmap(imgDrawing.Width, imgDrawing.Height, PixelFormat.Format32bppArgb);
                 Graphics g = Graphics.FromImage(bitmap);
@@ -225,7 +249,7 @@ namespace UsecaseHelper
 
                 Draw(g);
 
-                bitmap.Save(filename, ImageFormat.Png);
+                bitmap.Save(filename, imageFormat);
             }
         }
     }
