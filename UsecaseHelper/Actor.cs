@@ -10,13 +10,23 @@ namespace UsecaseHelper
 
         protected override void DrawSelf(Graphics g)
         {
-            g.DrawEllipse(_pen, X + Width / 2 - 15, Y + 10, 30, 30);
-            g.DrawLine(_pen, X + Width / 2, Y + 40, X + Width / 2, Y + 80);
-            g.DrawLine(_pen, X + Width / 2, Y + 80, X + Width / 2 + 15, Y + 100);
-            g.DrawLine(_pen, X + Width / 2, Y + 80, X + Width / 2 - 15, Y + 100);
-            g.DrawLine(_pen, X + Width / 2 - 15, Y + 50, X + Width / 2 + 15, Y + 50);
+            DrawSelf(g, _pen, _brush, X, Y);
+        }
 
-            g.DrawString(Name, _font, _brush, X + (Width / 2) - (TextSize.Width / 2), Y + 100 + 5);
+        protected override void DrawSelfGhost(Graphics g, int x, int y)
+        {
+            DrawSelf(g, _penGhost, _brushGhost, x, y);
+        }
+
+        private void DrawSelf(Graphics g, Pen pen, Brush brush, int x, int y)
+        {
+            g.DrawEllipse(pen, x + Width / 2 - 15, y + 10, 30, 30);
+            g.DrawLine(pen, x + Width / 2, y + 40, x + Width / 2, y + 80);
+            g.DrawLine(pen, x + Width / 2, y + 80, x + Width / 2 + 15, y + 100);
+            g.DrawLine(pen, x + Width / 2, y + 80, x + Width / 2 - 15, y + 100);
+            g.DrawLine(pen, x + Width / 2 - 15, y + 50, x + Width / 2 + 15, y + 50);
+
+            g.DrawString(Name, _font, brush, x + (Width / 2) - (TextSize.Width / 2), y + 100 + 5);
         }
     }
 }

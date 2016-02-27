@@ -17,11 +17,55 @@ namespace UsecaseHelper
 
         protected override void DrawSelf(Graphics g)
         {
-            g.DrawEllipse(_pen, X, Y, Width, Height);
+            DrawSelf(g, _pen, _brush, X, Y);
+        }
 
-            g.DrawString(Name, _font, _brush, X + (Width / 2) - (TextSize.Width / 2), Y + (Height / 2) - (TextSize.Height / 2));
+        protected override void DrawSelfGhost(Graphics g, int x, int y)
+        {
+            DrawSelf(g, _penGhost, _brushGhost, x, y);
+        }
 
-            Actors.ForEach(actor => g.DrawLine(_pen, X + Width / 2, Y + Height / 2, actor.X + Width/2, actor.Y + Height/2));
+        private void DrawSelf(Graphics g, Pen pen, Brush brush, int x, int y)
+        {
+            g.DrawEllipse(pen, x, y, Width, Height);
+
+            g.DrawString(Name, _font, brush, x + (Width / 2) - (TextSize.Width / 2), y + (Height / 2) - (TextSize.Height / 2));
+
+            Actors.ForEach(actor =>
+            {
+                int targetX = actor.X + Width / 2;
+                int targetY = actor.Y + Height / 2;
+
+                if (actor == MainForm.SelectedDrawable)
+                {
+                    targetX = actor.GhostX + Width/2;
+                    targetY = actor.GhostY + Height/2;
+                }
+
+                g.DrawLine(pen, x + Width/2, y + Height/2, targetX, targetY);
+            });
+        }
+
+        public override void Edit()
+        {
+            UseCaseForm useCaseForm = new UseCaseForm
+            {
+                CaseName = Name,
+                Assumptions = Assumptions,
+                Description = Description,
+                Exceptions = Exceptions,
+                Result = Result,
+                Summary = Summary
+            };
+
+            useCaseForm.ShowDialog();
+
+            Name = useCaseForm.CaseName;
+            Assumptions = useCaseForm.Assumptions;
+            Description = useCaseForm.Description;
+            Exceptions = useCaseForm.Exceptions;
+            Result = useCaseForm.Result;
+            Summary = useCaseForm.Summary;
         }
     }
 }

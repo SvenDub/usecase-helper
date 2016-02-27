@@ -188,6 +188,10 @@
             this.imgDrawing.TabStop = false;
             this.imgDrawing.Paint += new System.Windows.Forms.PaintEventHandler(this.imgDrawing_Paint);
             this.imgDrawing.MouseClick += new System.Windows.Forms.MouseEventHandler(this.imgDrawing_MouseClick);
+            this.imgDrawing.MouseDown += new System.Windows.Forms.MouseEventHandler(this.imgDrawing_MouseDown);
+            this.imgDrawing.MouseLeave += new System.EventHandler(this.imgDrawing_MouseLeave);
+            this.imgDrawing.MouseMove += new System.Windows.Forms.MouseEventHandler(this.imgDrawing_MouseMove);
+            this.imgDrawing.MouseUp += new System.Windows.Forms.MouseEventHandler(this.imgDrawing_MouseUp);
             // 
             // statusBar
             // 
