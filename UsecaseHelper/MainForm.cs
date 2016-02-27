@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace UsecaseHelper
 {
@@ -250,6 +248,67 @@ namespace UsecaseHelper
                 Draw(g);
 
                 bitmap.Save(filename, imageFormat);
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog()
+            {
+                AddExtension = true,
+                DefaultExt = "json",
+                Filter = "Json File|*.json",
+                FileName = "Use Case"
+            };
+
+            DialogResult result = dialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                string filename = dialog.FileName;
+
+                string json = JsonConvert.SerializeObject(_drawables, new JsonSerializerSettings()
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                    TypeNameHandling = TypeNameHandling.Auto
+                });
+
+                File.WriteAllText(filename, json);
+            }
+
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog()
+            {
+                Filter = "Json File|*.json"
+            };
+
+            DialogResult result = dialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                string json = File.ReadAllText(dialog.FileName);
+
+                try
+                {
+                    List<Drawable> drawables = JsonConvert.DeserializeObject<List<Drawable>>(json,
+                        new JsonSerializerSettings()
+                        {
+                            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                            TypeNameHandling = TypeNameHandling.Auto
+                        });
+
+                    _drawables.Clear();
+                    _drawables.AddRange(drawables);
+
+                    imgDrawing.Invalidate();
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine(exception.StackTrace);
+                }
             }
         }
     }
