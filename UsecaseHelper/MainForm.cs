@@ -48,6 +48,10 @@ namespace UsecaseHelper
             {
                 EditObject(e.X, e.Y);
             }
+            else if (rdiModeDelete.Checked)
+            {
+                DeleteObject(e.X, e.Y);
+            }
         }
 
         private void CreateObject(int x, int y)
@@ -120,6 +124,17 @@ namespace UsecaseHelper
             imgDrawing.Invalidate();
         }
 
+        private void DeleteObject(int x, int y)
+        {
+            List<Drawable> deleteList = _drawables.FindAll(drawable => drawable.InSelection(x, y));
+
+            _drawables.FindAll(drawable => drawable is UseCase).Cast<UseCase>().ToList().ForEach(useCase => useCase.Actors.RemoveAll(actor => deleteList.Contains(actor)));
+
+            _drawables.RemoveAll(drawable => deleteList.Contains(drawable));
+
+            imgDrawing.Invalidate();
+        }
+
         private void imgDrawing_MouseDown(object sender, MouseEventArgs e)
         {
             SelectedDrawable = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y));
@@ -144,6 +159,13 @@ namespace UsecaseHelper
                 SelectedDrawable.GhostY = e.Y;
                 imgDrawing.Invalidate();
             }
+        }
+
+        private void btnClearAll_Click(object sender, System.EventArgs e)
+        {
+            _drawables.Clear();
+
+            imgDrawing.Invalidate();
         }
     }
 }
