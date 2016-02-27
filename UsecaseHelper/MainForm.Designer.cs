@@ -42,6 +42,7 @@
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.rdiModeDelete = new System.Windows.Forms.RadioButton();
+            this.rdiModeUnlink = new System.Windows.Forms.RadioButton();
             this.pnlControls.SuspendLayout();
             this.gbxMode.SuspendLayout();
             this.gbxElement.SuspendLayout();
@@ -77,6 +78,7 @@
             // 
             this.gbxMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbxMode.Controls.Add(this.rdiModeUnlink);
             this.gbxMode.Controls.Add(this.rdiModeDelete);
             this.gbxMode.Controls.Add(this.rdiModeSelect);
             this.gbxMode.Controls.Add(this.rdiModeCreate);
@@ -212,6 +214,17 @@
             this.rdiModeDelete.Text = "Delete";
             this.rdiModeDelete.UseVisualStyleBackColor = true;
             // 
+            // rdiModeUnlink
+            // 
+            this.rdiModeUnlink.AutoSize = true;
+            this.rdiModeUnlink.Location = new System.Drawing.Point(7, 89);
+            this.rdiModeUnlink.Name = "rdiModeUnlink";
+            this.rdiModeUnlink.Size = new System.Drawing.Size(55, 17);
+            this.rdiModeUnlink.TabIndex = 3;
+            this.rdiModeUnlink.TabStop = true;
+            this.rdiModeUnlink.Text = "Unlink";
+            this.rdiModeUnlink.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,6 +264,7 @@
         private System.Windows.Forms.RadioButton rdiElementUseCase;
         private System.Windows.Forms.RadioButton rdiElementActor;
         private System.Windows.Forms.RadioButton rdiModeDelete;
+        private System.Windows.Forms.RadioButton rdiModeUnlink;
     }
 }
 

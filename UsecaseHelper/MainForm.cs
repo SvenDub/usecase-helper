@@ -52,6 +52,10 @@ namespace UsecaseHelper
             {
                 DeleteObject(e.X, e.Y);
             }
+            else if (rdiModeUnlink.Checked)
+            {
+                UnlinkObject(e.X, e.Y);
+            }
         }
 
         private void CreateObject(int x, int y)
@@ -131,6 +135,37 @@ namespace UsecaseHelper
             _drawables.FindAll(drawable => drawable is UseCase).Cast<UseCase>().ToList().ForEach(useCase => useCase.Actors.RemoveAll(actor => deleteList.Contains(actor)));
 
             _drawables.RemoveAll(drawable => deleteList.Contains(drawable));
+
+            imgDrawing.Invalidate();
+        }
+
+        private void UnlinkObject(int x, int y)
+        {
+            if (_selectedActor == null)
+            {
+                Actor selection = _drawables.FindAll(drawable => drawable is Actor).Find(actor => actor.InSelection(x, y)) as Actor;
+                if (selection == null)
+                {
+                    MessageBox.Show("Select an actor");
+                }
+                else
+                {
+                    _selectedActor = selection;
+                }
+            }
+            else
+            {
+                UseCase selection = _drawables.FindAll(drawable => drawable is UseCase).Find(useCase => useCase.InSelection(x, y)) as UseCase;
+                if (selection == null)
+                {
+                    MessageBox.Show("Select a use case");
+                }
+                else
+                {
+                    selection.Actors.Remove(_selectedActor);
+                    _selectedActor = null;
+                }
+            }
 
             imgDrawing.Invalidate();
         }
