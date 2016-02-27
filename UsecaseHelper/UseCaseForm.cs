@@ -12,9 +12,21 @@ namespace UsecaseHelper
 {
     public partial class UseCaseForm : Form
     {
+        public string CaseName => txtName.Text;
+        public string Summary => txtSummary.Text;
+        public string Assumptions => txtAssumptions.Text;
+        public string Description => txtDescription.Text;
+        public string Exceptions => txtExceptions.Text;
+        public string Result => txtResult.Text;
+
         public UseCaseForm()
         {
             InitializeComponent();
+        }
+
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
         }
     }
 }
