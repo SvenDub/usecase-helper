@@ -15,10 +15,8 @@ namespace UsecaseHelper
         public override int Width => TextSize.Width + 25;
         public override int Height => TextSize.Height + 25;
 
-        public override void Draw(Graphics g)
+        protected override void DrawSelf(Graphics g)
         {
-            base.Draw(g);
-
             g.DrawEllipse(_pen, X, Y, Width, Height);
 
             g.DrawString(Name, _font, _brush, X + (Width / 2) - (TextSize.Width / 2), Y + (Height / 2) - (TextSize.Height / 2));
