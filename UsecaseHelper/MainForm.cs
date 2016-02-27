@@ -145,5 +145,12 @@ namespace UsecaseHelper
                 imgDrawing.Invalidate();
             }
         }
+
+        private void btnClearAll_Click(object sender, System.EventArgs e)
+        {
+            _drawables.Clear();
+
+            imgDrawing.Invalidate();
+        }
     }
 }

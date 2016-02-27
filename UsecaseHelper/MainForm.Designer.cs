@@ -82,6 +82,7 @@
             this.btnClearAll.TabIndex = 2;
             this.btnClearAll.Text = "Clear All";
             this.btnClearAll.UseVisualStyleBackColor = true;
+            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
             // 
             // gbxMode
             // 
