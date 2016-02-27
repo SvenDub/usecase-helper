@@ -13,8 +13,7 @@ namespace UsecaseHelper
     {
         public const bool DrawBoundingBox = false;
 
-        private readonly List<UseCase> _useCases = new List<UseCase>();
-        private readonly List<Actor> _actors = new List<Actor>();
+        private readonly List<Drawable> _drawables = new List<Drawable>(); 
 
         private Actor _selectedActor;
 
@@ -25,8 +24,7 @@ namespace UsecaseHelper
 
         private void imgDrawing_Paint(object sender, PaintEventArgs e)
         {
-            _useCases.ForEach(useCase => useCase.Draw(e.Graphics));
-            _actors.ForEach(actor => actor.Draw(e.Graphics));
+            _drawables.ForEach(drawable => drawable.Draw(e.Graphics));
         }
 
         private void imgDrawing_MouseClick(object sender, MouseEventArgs e)
@@ -37,7 +35,7 @@ namespace UsecaseHelper
             }
             else if (rdiModeSelect.Checked)
             {
-                
+                EditObject(e.X, e.Y);
             }
         }
 
@@ -46,7 +44,7 @@ namespace UsecaseHelper
             if (rdiElementActor.Checked)
             {
                 string name = Prompt.ShowDialog("Name:", "Create new actor");
-                _actors.Add(new Actor()
+                _drawables.Add(new Actor()
                 {
                     Name = name,
                     X = x,
@@ -59,7 +57,7 @@ namespace UsecaseHelper
 
                 useCaseForm.ShowDialog();
 
-                _useCases.Add(new UseCase()
+                _drawables.Add(new UseCase()
                 {
                     Name = useCaseForm.CaseName,
                     X = x,
@@ -75,7 +73,7 @@ namespace UsecaseHelper
             {
                 if (_selectedActor == null)
                 {
-                    Actor selection = _actors.Find(actor => actor.InSelection(x, y));
+                    Actor selection = _drawables.FindAll(drawable => drawable is Actor).Find(actor => actor.InSelection(x, y)) as Actor;
                     if (selection == null)
                     {
                         MessageBox.Show("Select an actor");
@@ -87,7 +85,7 @@ namespace UsecaseHelper
                 }
                 else
                 {
-                    UseCase selection = _useCases.Find(useCase => useCase.InSelection(x, y));
+                    UseCase selection = _drawables.FindAll(drawable => drawable is UseCase).Find(useCase => useCase.InSelection(x, y)) as UseCase;
                     if (selection == null)
                     {
                         MessageBox.Show("Select a use case");
@@ -101,6 +99,11 @@ namespace UsecaseHelper
             }
 
             imgDrawing.Invalidate();
+        }
+
+        private void EditObject(int x, int y)
+        {
+            
         }
     }
 }
