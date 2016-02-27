@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,15 +26,20 @@ namespace UsecaseHelper
 
         private void imgDrawing_Paint(object sender, PaintEventArgs e)
         {
+            Draw(e.Graphics);
+        }
+
+        private void Draw(Graphics g)
+        {
             _drawables.ForEach(drawable =>
             {
                 if (drawable == SelectedDrawable)
                 {
-                    SelectedDrawable.DrawGhost(e.Graphics);
+                    SelectedDrawable.DrawGhost(g);
                 }
                 else
                 {
-                    drawable.Draw(e.Graphics);
+                    drawable.Draw(g);
                 }
             });
         }
@@ -201,6 +207,26 @@ namespace UsecaseHelper
             _drawables.Clear();
 
             imgDrawing.Invalidate();
+        }
+
+        private void btnExport_Click(object sender, System.EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            DialogResult result = dialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                string filename = dialog.FileName;
+
+                Bitmap bitmap = new Bitmap(imgDrawing.Width, imgDrawing.Height, PixelFormat.Format32bppArgb);
+                Graphics g = Graphics.FromImage(bitmap);
+
+                g.Clear(Color.White);
+
+                Draw(g);
+
+                bitmap.Save(filename, ImageFormat.Png);
+            }
         }
     }
 }
