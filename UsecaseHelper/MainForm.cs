@@ -16,6 +16,7 @@ namespace UsecaseHelper
         private readonly List<Drawable> _drawables = new List<Drawable>(); 
 
         private Actor _selectedActor;
+        public static Drawable SelectedDrawable;
 
         public MainForm()
         {
@@ -24,7 +25,17 @@ namespace UsecaseHelper
 
         private void imgDrawing_Paint(object sender, PaintEventArgs e)
         {
-            _drawables.ForEach(drawable => drawable.Draw(e.Graphics));
+            _drawables.ForEach(drawable =>
+            {
+                if (drawable == SelectedDrawable)
+                {
+                    SelectedDrawable.DrawGhost(e.Graphics);
+                }
+                else
+                {
+                    drawable.Draw(e.Graphics);
+                }
+            });
         }
 
         private void imgDrawing_MouseClick(object sender, MouseEventArgs e)
@@ -107,6 +118,32 @@ namespace UsecaseHelper
             selection?.Edit();
 
             imgDrawing.Invalidate();
+        }
+
+        private void imgDrawing_MouseDown(object sender, MouseEventArgs e)
+        {
+            SelectedDrawable = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y));
+        }
+
+        private void imgDrawing_MouseUp(object sender, MouseEventArgs e)
+        {
+            SelectedDrawable?.Move(e.X, e.Y);
+            SelectedDrawable = null;
+        }
+
+        private void imgDrawing_MouseLeave(object sender, System.EventArgs e)
+        {
+            SelectedDrawable = null;
+        }
+
+        private void imgDrawing_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (SelectedDrawable != null)
+            {
+                SelectedDrawable.GhostX = e.X;
+                SelectedDrawable.GhostY = e.Y;
+                imgDrawing.Invalidate();
+            }
         }
     }
 }

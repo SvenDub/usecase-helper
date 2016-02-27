@@ -7,12 +7,16 @@ namespace UsecaseHelper
     {
         public int X { get; set; }
         public int Y { get; set; }
+        public int GhostX { get; set; }
+        public int GhostY { get; set; }
         public abstract int Width { get; }
         public abstract int Height { get; }
         public string Name { get; set; }
 
         protected readonly Pen _pen = Pens.Black;
         protected readonly Brush _brush = Brushes.Black;
+        protected readonly Pen _penGhost = Pens.Black;
+        protected readonly Brush _brushGhost = Brushes.Black;
 
         protected readonly Font _font = new Font(FontFamily.GenericMonospace, 10);
         protected Size TextSize => TextRenderer.MeasureText(Name, _font);
@@ -38,7 +42,22 @@ namespace UsecaseHelper
             g.TranslateTransform(Width / 2f, Height / 2f);
         }
 
+        public void DrawGhost(Graphics g)
+        {
+            g.TranslateTransform(-Width / 2f, -Height / 2f);
+
+            DrawSelfGhost(g, GhostX, GhostY);
+
+            if (MainForm.DrawBoundingBox)
+            {
+                g.DrawRectangle(_pen, X, Y, Width, Height);
+            }
+
+            g.TranslateTransform(Width / 2f, Height / 2f);
+        }
+
         protected abstract void DrawSelf(Graphics g);
+        protected abstract void DrawSelfGhost(Graphics g, int x, int y);
 
         public virtual void Edit()
         {
@@ -47,6 +66,12 @@ namespace UsecaseHelper
             {
                 Name = name;
             }
+        }
+
+        public void Move(int x, int y)
+        {
+            X = x;
+            Y = y;
         }
     }
 }
