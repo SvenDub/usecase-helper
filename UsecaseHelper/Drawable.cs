@@ -161,7 +161,7 @@ namespace UsecaseHelper
         public virtual void Edit()
         {
             string name = Prompt.ShowDialog("Name:", "Edit " + Name);
-            if (!name.Equals(""))
+            if (!name.Equals(string.Empty))
             {
                 Name = name;
             }

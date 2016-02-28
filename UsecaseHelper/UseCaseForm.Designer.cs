@@ -227,6 +227,7 @@ namespace UsecaseHelper
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
             this.Name = "UseCaseForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "UseCaseForm";
             this.ResumeLayout(false);
             this.PerformLayout();

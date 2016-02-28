@@ -107,31 +107,36 @@ namespace UsecaseHelper
             if (rdiElementActor.Checked)
             {
                 string name = Prompt.ShowDialog("Name:", "Create new actor");
-                _drawables.Add(new Actor
+
+                if (!name.Equals(string.Empty))
                 {
-                    Name = name,
-                    X = x,
-                    Y = y
-                });
+                    _drawables.Add(new Actor
+                    {
+                        Name = name,
+                        X = x,
+                        Y = y
+                    });
+                }
             }
             // Create use case
             else if (rdiElementUseCase.Checked)
             {
                 UseCaseForm useCaseForm = new UseCaseForm();
 
-                useCaseForm.ShowDialog();
-
-                _drawables.Add(new UseCase
+                if (useCaseForm.ShowDialog() == DialogResult.OK)
                 {
-                    Name = useCaseForm.CaseName,
-                    X = x,
-                    Y = y,
-                    Assumptions = useCaseForm.Assumptions,
-                    Description = useCaseForm.Description,
-                    Exceptions = useCaseForm.Exceptions,
-                    Result = useCaseForm.Result,
-                    Summary = useCaseForm.Summary
-                });
+                    _drawables.Add(new UseCase
+                    {
+                        Name = useCaseForm.CaseName,
+                        X = x,
+                        Y = y,
+                        Assumptions = useCaseForm.Assumptions,
+                        Description = useCaseForm.Description,
+                        Exceptions = useCaseForm.Exceptions,
+                        Result = useCaseForm.Result,
+                        Summary = useCaseForm.Summary
+                    });
+                }
             }
             // Create link
             else if (rdiElementLine.Checked)
