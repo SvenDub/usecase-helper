@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace UsecaseHelper
@@ -15,7 +9,7 @@ namespace UsecaseHelper
         public string CaseName
         {
             get { return txtName.Text; }
-            set { txtName.Text = value; }
+            set {  txtName.Text = value; }
         }
 
         public string Summary
@@ -46,6 +40,11 @@ namespace UsecaseHelper
         {
             get { return txtResult.Text; }
             set { txtResult.Text = value; }
+        }
+
+        public List<Actor> Actors
+        {
+            set { txtActors.Text = string.Join(", ", value); }
         }
 
         public UseCaseForm()
