@@ -189,6 +189,8 @@ namespace UsecaseHelper
         private void imgDrawing_MouseLeave(object sender, System.EventArgs e)
         {
             SelectedDrawable = null;
+
+            statusBarLabel.Text = "Ready";
         }
 
         private void imgDrawing_MouseMove(object sender, MouseEventArgs e)
@@ -198,6 +200,64 @@ namespace UsecaseHelper
                 SelectedDrawable.GhostX = e.X;
                 SelectedDrawable.GhostY = e.Y;
                 imgDrawing.Invalidate();
+            }
+
+            if (rdiModeCreate.Checked)
+            {
+                if (rdiElementActor.Checked)
+                {
+                    statusBarLabel.Text = "Create a new actor";
+                }
+                else if (rdiElementUseCase.Checked)
+                {
+                    statusBarLabel.Text = "Create a new use case";
+                }
+                else if (rdiElementLine.Checked)
+                {
+                    if (_selectedActor == null)
+                    {
+                        Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is Actor);
+                        statusBarLabel.Text = selection == null ? "Select an actor" : $"Link {selection.Name}";
+                    }
+                    else
+                    {
+                        Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is UseCase);
+                        statusBarLabel.Text = selection == null ? "Select a use case" : $"Link {_selectedActor.Name} to {selection.Name}";
+                    }
+                }
+            }
+            else if (rdiModeDelete.Checked)
+            {
+                Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y));
+
+                statusBarLabel.Text = selection != null ? $"Delete {selection.Name}" : "Ready";
+            }
+            else if (rdiModeUnlink.Checked)
+            {
+                if (_selectedActor == null)
+                {
+                    Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is Actor);
+                    statusBarLabel.Text = selection == null ? "Select an actor" : $"Unlink {selection.Name}";
+                }
+                else
+                {
+                    Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is UseCase);
+                    statusBarLabel.Text = selection == null ? "Select a use case" : $"Unlink {_selectedActor.Name} from {selection.Name}";
+                }
+            } 
+            else if (rdiModeSelect.Checked)
+            {
+                if (SelectedDrawable != null)
+                {
+                    statusBarLabel.Text = $"Moving {SelectedDrawable.Name}";
+                }
+                else
+                {
+                    Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y));
+                    statusBarLabel.Text = selection == null
+                        ? "Ready"
+                        : $"Click to select {selection.Name} - Drag to move";
+                }
             }
         }
 
@@ -225,6 +285,8 @@ namespace UsecaseHelper
                 string filename = dialog.FileName;
                 ImageFormat imageFormat;
 
+                statusBarLabel.Text = $"Exporting to {filename}...";
+
                 switch (dialog.FileName.Split('.').Last())
                 {
                     default:
@@ -248,6 +310,8 @@ namespace UsecaseHelper
                 Draw(g);
 
                 bitmap.Save(filename, imageFormat);
+
+                statusBarLabel.Text = "Ready";
             }
         }
 
@@ -267,6 +331,8 @@ namespace UsecaseHelper
             {
                 string filename = dialog.FileName;
 
+                statusBarLabel.Text = $"Saving to {filename}...";
+
                 string json = JsonConvert.SerializeObject(_drawables, new JsonSerializerSettings()
                 {
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects,
@@ -274,6 +340,8 @@ namespace UsecaseHelper
                 });
 
                 File.WriteAllText(filename, json);
+
+                statusBarLabel.Text = "Ready";
             }
 
         }
@@ -289,6 +357,8 @@ namespace UsecaseHelper
 
             if (result == DialogResult.OK)
             {
+                statusBarLabel.Text = $"Loading from {dialog.FileName}...";
+
                 string json = File.ReadAllText(dialog.FileName);
 
                 try
@@ -303,11 +373,15 @@ namespace UsecaseHelper
                     _drawables.Clear();
                     _drawables.AddRange(drawables);
 
+                    statusBarLabel.Text = "Ready";
+
                     imgDrawing.Invalidate();
                 }
                 catch (Exception exception)
                 {
                     Console.WriteLine(exception.StackTrace);
+
+                    statusBarLabel.Text = $"Failed ({exception.Message})";
                 }
             }
         }
