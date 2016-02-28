@@ -20,13 +20,13 @@ namespace UsecaseHelper
 
         private void DrawSelf(Graphics g, Pen pen, Brush brush, int x, int y)
         {
-            g.DrawEllipse(pen, x + Width / 2 - 15, y + 10, 30, 30);
-            g.DrawLine(pen, x + Width / 2, y + 40, x + Width / 2, y + 80);
-            g.DrawLine(pen, x + Width / 2, y + 80, x + Width / 2 + 15, y + 100);
-            g.DrawLine(pen, x + Width / 2, y + 80, x + Width / 2 - 15, y + 100);
-            g.DrawLine(pen, x + Width / 2 - 15, y + 50, x + Width / 2 + 15, y + 50);
+            g.DrawEllipse(pen, x + Width/2 - 15, y + 10, 30, 30);
+            g.DrawLine(pen, x + Width/2, y + 40, x + Width/2, y + 80);
+            g.DrawLine(pen, x + Width/2, y + 80, x + Width/2 + 15, y + 100);
+            g.DrawLine(pen, x + Width/2, y + 80, x + Width/2 - 15, y + 100);
+            g.DrawLine(pen, x + Width/2 - 15, y + 50, x + Width/2 + 15, y + 50);
 
-            g.DrawString(Name, _font, brush, x + (Width / 2) - (TextSize.Width / 2), y + 100 + 5);
+            g.DrawString(Name, _font, brush, x + Width/2 - TextSize.Width/2, y + 100 + 5);
         }
 
         public override string ToString() => Name;

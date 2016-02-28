@@ -12,11 +12,11 @@ namespace UsecaseHelper
     public partial class MainForm : Form
     {
         public const bool DrawBoundingBox = false;
+        public static Drawable SelectedDrawable;
 
-        private readonly List<Drawable> _drawables = new List<Drawable>(); 
+        private readonly List<Drawable> _drawables = new List<Drawable>();
 
         private Actor _selectedActor;
-        public static Drawable SelectedDrawable;
 
         public MainForm()
         {
@@ -97,7 +97,9 @@ namespace UsecaseHelper
             {
                 if (_selectedActor == null)
                 {
-                    Actor selection = _drawables.FindAll(drawable => drawable is Actor).Find(actor => actor.InSelection(x, y)) as Actor;
+                    Actor selection =
+                        _drawables.FindAll(drawable => drawable is Actor).Find(actor => actor.InSelection(x, y)) as
+                            Actor;
                     if (selection == null)
                     {
                         MessageBox.Show("Select an actor");
@@ -109,7 +111,9 @@ namespace UsecaseHelper
                 }
                 else
                 {
-                    UseCase selection = _drawables.FindAll(drawable => drawable is UseCase).Find(useCase => useCase.InSelection(x, y)) as UseCase;
+                    UseCase selection =
+                        _drawables.FindAll(drawable => drawable is UseCase).Find(useCase => useCase.InSelection(x, y))
+                            as UseCase;
                     if (selection == null)
                     {
                         MessageBox.Show("Select a use case");
@@ -137,7 +141,10 @@ namespace UsecaseHelper
         {
             List<Drawable> deleteList = _drawables.FindAll(drawable => drawable.InSelection(x, y));
 
-            _drawables.FindAll(drawable => drawable is UseCase).Cast<UseCase>().ToList().ForEach(useCase => useCase.Actors.RemoveAll(actor => deleteList.Contains(actor)));
+            _drawables.FindAll(drawable => drawable is UseCase)
+                .Cast<UseCase>()
+                .ToList()
+                .ForEach(useCase => useCase.Actors.RemoveAll(actor => deleteList.Contains(actor)));
 
             _drawables.RemoveAll(drawable => deleteList.Contains(drawable));
 
@@ -148,7 +155,8 @@ namespace UsecaseHelper
         {
             if (_selectedActor == null)
             {
-                Actor selection = _drawables.FindAll(drawable => drawable is Actor).Find(actor => actor.InSelection(x, y)) as Actor;
+                Actor selection =
+                    _drawables.FindAll(drawable => drawable is Actor).Find(actor => actor.InSelection(x, y)) as Actor;
                 if (selection == null)
                 {
                     MessageBox.Show("Select an actor");
@@ -160,7 +168,9 @@ namespace UsecaseHelper
             }
             else
             {
-                UseCase selection = _drawables.FindAll(drawable => drawable is UseCase).Find(useCase => useCase.InSelection(x, y)) as UseCase;
+                UseCase selection =
+                    _drawables.FindAll(drawable => drawable is UseCase).Find(useCase => useCase.InSelection(x, y)) as
+                        UseCase;
                 if (selection == null)
                 {
                     MessageBox.Show("Select a use case");
@@ -216,13 +226,17 @@ namespace UsecaseHelper
                 {
                     if (_selectedActor == null)
                     {
-                        Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is Actor);
+                        Drawable selection =
+                            _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is Actor);
                         statusBarLabel.Text = selection == null ? "Select an actor" : $"Link {selection.Name}";
                     }
                     else
                     {
-                        Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is UseCase);
-                        statusBarLabel.Text = selection == null ? "Select a use case" : $"Link {_selectedActor.Name} to {selection.Name}";
+                        Drawable selection =
+                            _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is UseCase);
+                        statusBarLabel.Text = selection == null
+                            ? "Select a use case"
+                            : $"Link {_selectedActor.Name} to {selection.Name}";
                     }
                 }
             }
@@ -241,10 +255,13 @@ namespace UsecaseHelper
                 }
                 else
                 {
-                    Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is UseCase);
-                    statusBarLabel.Text = selection == null ? "Select a use case" : $"Unlink {_selectedActor.Name} from {selection.Name}";
+                    Drawable selection =
+                        _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is UseCase);
+                    statusBarLabel.Text = selection == null
+                        ? "Select a use case"
+                        : $"Unlink {_selectedActor.Name} from {selection.Name}";
                 }
-            } 
+            }
             else if (rdiModeSelect.Checked)
             {
                 if (SelectedDrawable != null)
@@ -343,7 +360,6 @@ namespace UsecaseHelper
 
                 statusBarLabel.Text = "Ready";
             }
-
         }
 
         private void btnLoad_Click(object sender, EventArgs e)

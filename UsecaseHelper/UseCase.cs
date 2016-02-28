@@ -6,7 +6,7 @@ namespace UsecaseHelper
     public class UseCase : Drawable
     {
         public string Summary { get; set; }
-        public List<Actor> Actors { get; } = new List<Actor>(); 
+        public List<Actor> Actors { get; } = new List<Actor>();
         public string Assumptions { get; set; }
         public string Description { get; set; }
         public string Exceptions { get; set; }
@@ -29,12 +29,12 @@ namespace UsecaseHelper
         {
             g.DrawEllipse(pen, x, y, Width, Height);
 
-            g.DrawString(Name, _font, brush, x + (Width / 2) - (TextSize.Width / 2), y + (Height / 2) - (TextSize.Height / 2));
+            g.DrawString(Name, _font, brush, x + Width/2 - TextSize.Width/2, y + Height/2 - TextSize.Height/2);
 
             Actors.ForEach(actor =>
             {
-                int targetX = actor.X + Width / 2;
-                int targetY = actor.Y + Height / 2;
+                int targetX = actor.X + Width/2;
+                int targetY = actor.Y + Height/2;
 
                 if (actor == MainForm.SelectedDrawable)
                 {
@@ -56,7 +56,7 @@ namespace UsecaseHelper
                 Exceptions = Exceptions,
                 Result = Result,
                 Summary = Summary,
-                Actors =  Actors
+                Actors = Actors
             };
 
             useCaseForm.ShowDialog();

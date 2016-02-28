@@ -6,10 +6,15 @@ namespace UsecaseHelper
 {
     public partial class UseCaseForm : Form
     {
+        public UseCaseForm()
+        {
+            InitializeComponent();
+        }
+
         public string CaseName
         {
             get { return txtName.Text; }
-            set {  txtName.Text = value; }
+            set { txtName.Text = value; }
         }
 
         public string Summary
@@ -45,11 +50,6 @@ namespace UsecaseHelper
         public List<Actor> Actors
         {
             set { txtActors.Text = string.Join(", ", value); }
-        }
-
-        public UseCaseForm()
-        {
-            InitializeComponent();
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)

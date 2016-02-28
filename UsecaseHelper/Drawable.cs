@@ -5,6 +5,14 @@ namespace UsecaseHelper
 {
     public abstract class Drawable
     {
+        protected readonly Brush _brush = Brushes.Black;
+        protected readonly Brush _brushGhost = Brushes.Black;
+
+        protected readonly Font _font = new Font(FontFamily.GenericMonospace, 10);
+
+        protected readonly Pen _pen = Pens.Black;
+        protected readonly Pen _penGhost = Pens.Black;
+
         public int X { get; set; }
         public int Y { get; set; }
         public int GhostX { get; set; }
@@ -12,13 +20,6 @@ namespace UsecaseHelper
         public abstract int Width { get; }
         public abstract int Height { get; }
         public string Name { get; set; }
-
-        protected readonly Pen _pen = Pens.Black;
-        protected readonly Brush _brush = Brushes.Black;
-        protected readonly Pen _penGhost = Pens.Black;
-        protected readonly Brush _brushGhost = Brushes.Black;
-
-        protected readonly Font _font = new Font(FontFamily.GenericMonospace, 10);
         protected Size TextSize => TextRenderer.MeasureText(Name, _font);
 
         public int Left => (int) (X - Width/2f);
@@ -30,7 +31,7 @@ namespace UsecaseHelper
 
         public void Draw(Graphics g)
         {
-            g.TranslateTransform(-Width / 2f, -Height / 2f);
+            g.TranslateTransform(-Width/2f, -Height/2f);
 
             DrawSelf(g);
 
@@ -39,12 +40,12 @@ namespace UsecaseHelper
                 g.DrawRectangle(_pen, X, Y, Width, Height);
             }
 
-            g.TranslateTransform(Width / 2f, Height / 2f);
+            g.TranslateTransform(Width/2f, Height/2f);
         }
 
         public void DrawGhost(Graphics g)
         {
-            g.TranslateTransform(-Width / 2f, -Height / 2f);
+            g.TranslateTransform(-Width/2f, -Height/2f);
 
             DrawSelfGhost(g, GhostX, GhostY);
 
@@ -53,7 +54,7 @@ namespace UsecaseHelper
                 g.DrawRectangle(_pen, X, Y, Width, Height);
             }
 
-            g.TranslateTransform(Width / 2f, Height / 2f);
+            g.TranslateTransform(Width/2f, Height/2f);
         }
 
         protected abstract void DrawSelf(Graphics g);
