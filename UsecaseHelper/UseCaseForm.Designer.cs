@@ -1,11 +1,14 @@
-﻿namespace UsecaseHelper
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace UsecaseHelper
 {
     partial class UseCaseForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -43,6 +46,7 @@
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblExceptions = new System.Windows.Forms.Label();
             this.lblResult = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblName
@@ -123,8 +127,8 @@
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirm.Location = new System.Drawing.Point(419, 308);
+            this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConfirm.Location = new System.Drawing.Point(338, 308);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(75, 23);
             this.btnConfirm.TabIndex = 8;
@@ -186,12 +190,27 @@
             this.lblResult.TabIndex = 14;
             this.lblResult.Text = "Result:";
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(419, 308);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 15;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // UseCaseForm
             // 
+            this.AcceptButton = this.btnConfirm;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(506, 342);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.lblExceptions);
             this.Controls.Add(this.lblDescription);
@@ -208,6 +227,7 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
             this.Name = "UseCaseForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "UseCaseForm";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -216,20 +236,21 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtSummary;
-        private System.Windows.Forms.TextBox txtActors;
-        private System.Windows.Forms.TextBox txtAssumptions;
-        private System.Windows.Forms.TextBox txtDescription;
-        private System.Windows.Forms.TextBox txtExceptions;
-        private System.Windows.Forms.TextBox txtResult;
-        private System.Windows.Forms.Button btnConfirm;
-        private System.Windows.Forms.Label lblSummary;
-        private System.Windows.Forms.Label lblActors;
-        private System.Windows.Forms.Label lblAssumptions;
-        private System.Windows.Forms.Label lblDescription;
-        private System.Windows.Forms.Label lblExceptions;
-        private System.Windows.Forms.Label lblResult;
+        private Label lblName;
+        private TextBox txtName;
+        private TextBox txtSummary;
+        private TextBox txtActors;
+        private TextBox txtAssumptions;
+        private TextBox txtDescription;
+        private TextBox txtExceptions;
+        private TextBox txtResult;
+        private Button btnConfirm;
+        private Label lblSummary;
+        private Label lblActors;
+        private Label lblAssumptions;
+        private Label lblDescription;
+        private Label lblExceptions;
+        private Label lblResult;
+        private Button btnCancel;
     }
 }

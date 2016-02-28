@@ -1,11 +1,14 @@
-﻿namespace UsecaseHelper
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace UsecaseHelper
 {
     partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -289,24 +292,24 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlControls;
-        private System.Windows.Forms.GroupBox gbxElement;
-        private System.Windows.Forms.Panel pnlContent;
-        private System.Windows.Forms.StatusStrip statusBar;
-        private System.Windows.Forms.ToolStripStatusLabel statusBarLabel;
-        private System.Windows.Forms.GroupBox gbxMode;
-        private System.Windows.Forms.Button btnClearAll;
-        private System.Windows.Forms.PictureBox imgDrawing;
-        private System.Windows.Forms.RadioButton rdiModeSelect;
-        private System.Windows.Forms.RadioButton rdiModeCreate;
-        private System.Windows.Forms.RadioButton rdiElementLine;
-        private System.Windows.Forms.RadioButton rdiElementUseCase;
-        private System.Windows.Forms.RadioButton rdiElementActor;
-        private System.Windows.Forms.RadioButton rdiModeDelete;
-        private System.Windows.Forms.RadioButton rdiModeUnlink;
-        private System.Windows.Forms.Button btnExport;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnLoad;
+        private Panel pnlControls;
+        private GroupBox gbxElement;
+        private Panel pnlContent;
+        private StatusStrip statusBar;
+        private ToolStripStatusLabel statusBarLabel;
+        private GroupBox gbxMode;
+        private Button btnClearAll;
+        private PictureBox imgDrawing;
+        private RadioButton rdiModeSelect;
+        private RadioButton rdiModeCreate;
+        private RadioButton rdiElementLine;
+        private RadioButton rdiElementUseCase;
+        private RadioButton rdiElementActor;
+        private RadioButton rdiModeDelete;
+        private RadioButton rdiModeUnlink;
+        private Button btnExport;
+        private Button btnSave;
+        private Button btnLoad;
     }
 }
 
