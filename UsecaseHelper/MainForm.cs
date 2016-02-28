@@ -68,7 +68,7 @@ namespace UsecaseHelper
             if (rdiElementActor.Checked)
             {
                 string name = Prompt.ShowDialog("Name:", "Create new actor");
-                _drawables.Add(new Actor()
+                _drawables.Add(new Actor
                 {
                     Name = name,
                     X = x,
@@ -81,7 +81,7 @@ namespace UsecaseHelper
 
                 useCaseForm.ShowDialog();
 
-                _drawables.Add(new UseCase()
+                _drawables.Add(new UseCase
                 {
                     Name = useCaseForm.CaseName,
                     X = x,
@@ -186,7 +186,7 @@ namespace UsecaseHelper
             SelectedDrawable = null;
         }
 
-        private void imgDrawing_MouseLeave(object sender, System.EventArgs e)
+        private void imgDrawing_MouseLeave(object sender, EventArgs e)
         {
             SelectedDrawable = null;
 
@@ -261,14 +261,14 @@ namespace UsecaseHelper
             }
         }
 
-        private void btnClearAll_Click(object sender, System.EventArgs e)
+        private void btnClearAll_Click(object sender, EventArgs e)
         {
             _drawables.Clear();
 
             imgDrawing.Invalidate();
         }
 
-        private void btnExport_Click(object sender, System.EventArgs e)
+        private void btnExport_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog
             {
@@ -317,7 +317,7 @@ namespace UsecaseHelper
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog()
+            SaveFileDialog dialog = new SaveFileDialog
             {
                 AddExtension = true,
                 DefaultExt = "json",
@@ -333,7 +333,7 @@ namespace UsecaseHelper
 
                 statusBarLabel.Text = $"Saving to {filename}...";
 
-                string json = JsonConvert.SerializeObject(_drawables, new JsonSerializerSettings()
+                string json = JsonConvert.SerializeObject(_drawables, new JsonSerializerSettings
                 {
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                     TypeNameHandling = TypeNameHandling.Auto
@@ -348,7 +348,7 @@ namespace UsecaseHelper
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog()
+            OpenFileDialog dialog = new OpenFileDialog
             {
                 Filter = "Json File|*.json"
             };
@@ -364,7 +364,7 @@ namespace UsecaseHelper
                 try
                 {
                     List<Drawable> drawables = JsonConvert.DeserializeObject<List<Drawable>>(json,
-                        new JsonSerializerSettings()
+                        new JsonSerializerSettings
                         {
                             PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                             TypeNameHandling = TypeNameHandling.Auto

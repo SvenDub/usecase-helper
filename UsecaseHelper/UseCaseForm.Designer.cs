@@ -1,11 +1,14 @@
-﻿namespace UsecaseHelper
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace UsecaseHelper
 {
     partial class UseCaseForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -216,20 +219,20 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.TextBox txtName;
-        private System.Windows.Forms.TextBox txtSummary;
-        private System.Windows.Forms.TextBox txtActors;
-        private System.Windows.Forms.TextBox txtAssumptions;
-        private System.Windows.Forms.TextBox txtDescription;
-        private System.Windows.Forms.TextBox txtExceptions;
-        private System.Windows.Forms.TextBox txtResult;
-        private System.Windows.Forms.Button btnConfirm;
-        private System.Windows.Forms.Label lblSummary;
-        private System.Windows.Forms.Label lblActors;
-        private System.Windows.Forms.Label lblAssumptions;
-        private System.Windows.Forms.Label lblDescription;
-        private System.Windows.Forms.Label lblExceptions;
-        private System.Windows.Forms.Label lblResult;
+        private Label lblName;
+        private TextBox txtName;
+        private TextBox txtSummary;
+        private TextBox txtActors;
+        private TextBox txtAssumptions;
+        private TextBox txtDescription;
+        private TextBox txtExceptions;
+        private TextBox txtResult;
+        private Button btnConfirm;
+        private Label lblSummary;
+        private Label lblActors;
+        private Label lblAssumptions;
+        private Label lblDescription;
+        private Label lblExceptions;
+        private Label lblResult;
     }
 }
