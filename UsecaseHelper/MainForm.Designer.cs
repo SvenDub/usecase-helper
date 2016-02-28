@@ -29,8 +29,13 @@
         private void InitializeComponent()
         {
             this.pnlControls = new System.Windows.Forms.Panel();
+            this.btnLoad = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
             this.btnClearAll = new System.Windows.Forms.Button();
             this.gbxMode = new System.Windows.Forms.GroupBox();
+            this.rdiModeUnlink = new System.Windows.Forms.RadioButton();
+            this.rdiModeDelete = new System.Windows.Forms.RadioButton();
             this.rdiModeSelect = new System.Windows.Forms.RadioButton();
             this.rdiModeCreate = new System.Windows.Forms.RadioButton();
             this.gbxElement = new System.Windows.Forms.GroupBox();
@@ -41,11 +46,6 @@
             this.imgDrawing = new System.Windows.Forms.PictureBox();
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.rdiModeDelete = new System.Windows.Forms.RadioButton();
-            this.rdiModeUnlink = new System.Windows.Forms.RadioButton();
-            this.btnExport = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnLoad = new System.Windows.Forms.Button();
             this.pnlControls.SuspendLayout();
             this.gbxMode.SuspendLayout();
             this.gbxElement.SuspendLayout();
@@ -68,6 +68,39 @@
             this.pnlControls.Name = "pnlControls";
             this.pnlControls.Size = new System.Drawing.Size(652, 132);
             this.pnlControls.TabIndex = 0;
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoad.Location = new System.Drawing.Point(565, 100);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(75, 23);
+            this.btnLoad.TabIndex = 5;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Location = new System.Drawing.Point(565, 71);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 4;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.Location = new System.Drawing.Point(565, 41);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.TabIndex = 3;
+            this.btnExport.Text = "Export";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnClearAll
             // 
@@ -94,6 +127,28 @@
             this.gbxMode.TabIndex = 1;
             this.gbxMode.TabStop = false;
             this.gbxMode.Text = "Mode";
+            // 
+            // rdiModeUnlink
+            // 
+            this.rdiModeUnlink.AutoSize = true;
+            this.rdiModeUnlink.Location = new System.Drawing.Point(7, 89);
+            this.rdiModeUnlink.Name = "rdiModeUnlink";
+            this.rdiModeUnlink.Size = new System.Drawing.Size(55, 17);
+            this.rdiModeUnlink.TabIndex = 3;
+            this.rdiModeUnlink.TabStop = true;
+            this.rdiModeUnlink.Text = "Unlink";
+            this.rdiModeUnlink.UseVisualStyleBackColor = true;
+            // 
+            // rdiModeDelete
+            // 
+            this.rdiModeDelete.AutoSize = true;
+            this.rdiModeDelete.Location = new System.Drawing.Point(7, 66);
+            this.rdiModeDelete.Name = "rdiModeDelete";
+            this.rdiModeDelete.Size = new System.Drawing.Size(56, 17);
+            this.rdiModeDelete.TabIndex = 2;
+            this.rdiModeDelete.TabStop = true;
+            this.rdiModeDelete.Text = "Delete";
+            this.rdiModeDelete.UseVisualStyleBackColor = true;
             // 
             // rdiModeSelect
             // 
@@ -206,63 +261,8 @@
             // statusBarLabel
             // 
             this.statusBarLabel.Name = "statusBarLabel";
-            this.statusBarLabel.Size = new System.Drawing.Size(83, 17);
-            this.statusBarLabel.Text = "statusBarLabel";
-            // 
-            // rdiModeDelete
-            // 
-            this.rdiModeDelete.AutoSize = true;
-            this.rdiModeDelete.Location = new System.Drawing.Point(7, 66);
-            this.rdiModeDelete.Name = "rdiModeDelete";
-            this.rdiModeDelete.Size = new System.Drawing.Size(56, 17);
-            this.rdiModeDelete.TabIndex = 2;
-            this.rdiModeDelete.TabStop = true;
-            this.rdiModeDelete.Text = "Delete";
-            this.rdiModeDelete.UseVisualStyleBackColor = true;
-            // 
-            // rdiModeUnlink
-            // 
-            this.rdiModeUnlink.AutoSize = true;
-            this.rdiModeUnlink.Location = new System.Drawing.Point(7, 89);
-            this.rdiModeUnlink.Name = "rdiModeUnlink";
-            this.rdiModeUnlink.Size = new System.Drawing.Size(55, 17);
-            this.rdiModeUnlink.TabIndex = 3;
-            this.rdiModeUnlink.TabStop = true;
-            this.rdiModeUnlink.Text = "Unlink";
-            this.rdiModeUnlink.UseVisualStyleBackColor = true;
-            // 
-            // btnExport
-            // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Location = new System.Drawing.Point(565, 41);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 23);
-            this.btnExport.TabIndex = 3;
-            this.btnExport.Text = "Export";
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(565, 71);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 4;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnLoad
-            // 
-            this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoad.Location = new System.Drawing.Point(565, 100);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(75, 23);
-            this.btnLoad.TabIndex = 5;
-            this.btnLoad.Text = "Load";
-            this.btnLoad.UseVisualStyleBackColor = true;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            this.statusBarLabel.Size = new System.Drawing.Size(39, 17);
+            this.statusBarLabel.Text = "Ready";
             // 
             // MainForm
             // 

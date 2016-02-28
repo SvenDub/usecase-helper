@@ -225,6 +225,8 @@ namespace UsecaseHelper
                 string filename = dialog.FileName;
                 ImageFormat imageFormat;
 
+                statusBarLabel.Text = $"Exporting to {filename}...";
+
                 switch (dialog.FileName.Split('.').Last())
                 {
                     default:
@@ -248,6 +250,8 @@ namespace UsecaseHelper
                 Draw(g);
 
                 bitmap.Save(filename, imageFormat);
+
+                statusBarLabel.Text = "Ready";
             }
         }
 
@@ -267,6 +271,8 @@ namespace UsecaseHelper
             {
                 string filename = dialog.FileName;
 
+                statusBarLabel.Text = $"Saving to {filename}...";
+
                 string json = JsonConvert.SerializeObject(_drawables, new JsonSerializerSettings()
                 {
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects,
@@ -274,6 +280,8 @@ namespace UsecaseHelper
                 });
 
                 File.WriteAllText(filename, json);
+
+                statusBarLabel.Text = "Ready";
             }
 
         }
@@ -289,6 +297,8 @@ namespace UsecaseHelper
 
             if (result == DialogResult.OK)
             {
+                statusBarLabel.Text = $"Loading from {dialog.FileName}...";
+
                 string json = File.ReadAllText(dialog.FileName);
 
                 try
@@ -303,11 +313,15 @@ namespace UsecaseHelper
                     _drawables.Clear();
                     _drawables.AddRange(drawables);
 
+                    statusBarLabel.Text = "Ready";
+
                     imgDrawing.Invalidate();
                 }
                 catch (Exception exception)
                 {
                     Console.WriteLine(exception.StackTrace);
+
+                    statusBarLabel.Text = $"Failed ({exception.Message})";
                 }
             }
         }
