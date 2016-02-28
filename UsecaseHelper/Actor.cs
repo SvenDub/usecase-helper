@@ -28,5 +28,7 @@ namespace UsecaseHelper
 
             g.DrawString(Name, _font, brush, x + (Width / 2) - (TextSize.Width / 2), y + 100 + 5);
         }
+
+        public override string ToString() => Name;
     }
 }

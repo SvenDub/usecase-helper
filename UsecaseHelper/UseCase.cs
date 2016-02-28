@@ -56,7 +56,8 @@ namespace UsecaseHelper
                 Description = Description,
                 Exceptions = Exceptions,
                 Result = Result,
-                Summary = Summary
+                Summary = Summary,
+                Actors =  Actors
             };
 
             useCaseForm.ShowDialog();
@@ -68,5 +69,7 @@ namespace UsecaseHelper
             Result = useCaseForm.Result;
             Summary = useCaseForm.Summary;
         }
+
+        public override string ToString() => Name;
     }
 }
