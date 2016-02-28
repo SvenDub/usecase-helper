@@ -9,13 +9,29 @@ using Newtonsoft.Json;
 
 namespace UsecaseHelper
 {
+    /// <summary>
+    ///     The main form showing all content.
+    /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        ///     Debug option for drawing bounding boxes.
+        /// </summary>
         public const bool DrawBoundingBox = false;
+
+        /// <summary>
+        ///     The drawable that is currently selected.
+        /// </summary>
         public static Drawable SelectedDrawable;
 
+        /// <summary>
+        ///     List of all drawables currently on the canvas.
+        /// </summary>
         private readonly List<Drawable> _drawables = new List<Drawable>();
 
+        /// <summary>
+        ///     The actor that is selected for linking purposes.
+        /// </summary>
         private Actor _selectedActor;
 
         public MainForm()
@@ -23,11 +39,20 @@ namespace UsecaseHelper
             InitializeComponent();
         }
 
+        /// <summary>
+        ///     Repaints the canvas.
+        /// </summary>
+        /// <param name="sender">The object that triggered this listener.</param>
+        /// <param name="e">Provides data for the <see cref="Control.Paint" /> event.</param>
         private void imgDrawing_Paint(object sender, PaintEventArgs e)
         {
             Draw(e.Graphics);
         }
 
+        /// <summary>
+        ///     Draws all drawables to the given drawing surface.
+        /// </summary>
+        /// <param name="g">The drawing surface to draw to.</param>
         private void Draw(Graphics g)
         {
             _drawables.ForEach(drawable =>
@@ -43,6 +68,14 @@ namespace UsecaseHelper
             });
         }
 
+        /// <summary>
+        ///     Handles clicks on the canvas.
+        /// </summary>
+        /// <param name="sender">The object that triggered this listener.</param>
+        /// <param name="e">
+        ///     Provides data for the <see cref="Control.MouseUp" />, <see cref="Control.MouseDown" />, and
+        ///     <see cref="Control.MouseMove" /> events.
+        /// </param>
         private void imgDrawing_MouseClick(object sender, MouseEventArgs e)
         {
             if (rdiModeCreate.Checked)
@@ -63,8 +96,14 @@ namespace UsecaseHelper
             }
         }
 
+        /// <summary>
+        ///     Creates a new object at the given coordinates.
+        /// </summary>
+        /// <param name="x">The x-coordinate.</param>
+        /// <param name="y">The y-coordinate.</param>
         private void CreateObject(int x, int y)
         {
+            // Create actor
             if (rdiElementActor.Checked)
             {
                 string name = Prompt.ShowDialog("Name:", "Create new actor");
@@ -75,6 +114,7 @@ namespace UsecaseHelper
                     Y = y
                 });
             }
+            // Create use case
             else if (rdiElementUseCase.Checked)
             {
                 UseCaseForm useCaseForm = new UseCaseForm();
@@ -93,6 +133,7 @@ namespace UsecaseHelper
                     Summary = useCaseForm.Summary
                 });
             }
+            // Create link
             else if (rdiElementLine.Checked)
             {
                 if (_selectedActor == null)
@@ -129,6 +170,11 @@ namespace UsecaseHelper
             imgDrawing.Invalidate();
         }
 
+        /// <summary>
+        ///     Edit the object at the given coordinates.
+        /// </summary>
+        /// <param name="x">The x-coordinate.</param>
+        /// <param name="y">The y-coordinate.</param>
         private void EditObject(int x, int y)
         {
             Drawable selection = _drawables.Find(drawable => drawable.InSelection(x, y));
@@ -137,6 +183,11 @@ namespace UsecaseHelper
             imgDrawing.Invalidate();
         }
 
+        /// <summary>
+        ///     Delete the object at the given coordinates.
+        /// </summary>
+        /// <param name="x">The x-coordinate.</param>
+        /// <param name="y">The y-coordinate.</param>
         private void DeleteObject(int x, int y)
         {
             List<Drawable> deleteList = _drawables.FindAll(drawable => drawable.InSelection(x, y));
@@ -151,6 +202,11 @@ namespace UsecaseHelper
             imgDrawing.Invalidate();
         }
 
+        /// <summary>
+        ///     Unlink an actor and a use case.
+        /// </summary>
+        /// <param name="x">The x-coordinate.</param>
+        /// <param name="y">The y-coordinate.</param>
         private void UnlinkObject(int x, int y)
         {
             if (_selectedActor == null)
@@ -185,17 +241,41 @@ namespace UsecaseHelper
             imgDrawing.Invalidate();
         }
 
+        /// <summary>
+        ///     Selects an object for dragging.
+        /// </summary>
+        /// <param name="sender">The object that triggered this listener.</param>
+        /// <param name="e">
+        ///     Provides data for the <see cref="Control.MouseUp" />, <see cref="Control.MouseDown" />, and
+        ///     <see cref="Control.MouseMove" /> events.
+        /// </param>
         private void imgDrawing_MouseDown(object sender, MouseEventArgs e)
         {
             SelectedDrawable = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y));
         }
 
+        /// <summary>
+        ///     Moves and deselects a dragged object.
+        /// </summary>
+        /// <param name="sender">The object that triggered this listener.</param>
+        /// <param name="e">
+        ///     Provides data for the <see cref="Control.MouseUp" />, <see cref="Control.MouseDown" />, and
+        ///     <see cref="Control.MouseMove" /> events.
+        /// </param>
         private void imgDrawing_MouseUp(object sender, MouseEventArgs e)
         {
             SelectedDrawable?.Move(e.X, e.Y);
             SelectedDrawable = null;
         }
 
+        /// <summary>
+        ///     Deselects a dragged object.
+        /// </summary>
+        /// <param name="sender">The object that triggered this listener.</param>
+        /// <param name="e">
+        ///     Represents the base class for classes that contain event data, and provides a value to use for events that do not
+        ///     include event data.
+        /// </param>
         private void imgDrawing_MouseLeave(object sender, EventArgs e)
         {
             SelectedDrawable = null;
@@ -203,8 +283,17 @@ namespace UsecaseHelper
             statusBarLabel.Text = "Ready";
         }
 
+        /// <summary>
+        ///     Show context information for the current cursor position.
+        /// </summary>
+        /// <param name="sender">The object that triggered this listener.</param>
+        /// <param name="e">
+        ///     Provides data for the <see cref="Control.MouseUp" />, <see cref="Control.MouseDown" />, and
+        ///     <see cref="Control.MouseMove" /> events.
+        /// </param>
         private void imgDrawing_MouseMove(object sender, MouseEventArgs e)
         {
+            // Draw ghost
             if (SelectedDrawable != null)
             {
                 SelectedDrawable.GhostX = e.X;
@@ -212,16 +301,20 @@ namespace UsecaseHelper
                 imgDrawing.Invalidate();
             }
 
+            // Create hint
             if (rdiModeCreate.Checked)
             {
+                // Actor
                 if (rdiElementActor.Checked)
                 {
                     statusBarLabel.Text = "Create a new actor";
                 }
+                // Use case
                 else if (rdiElementUseCase.Checked)
                 {
                     statusBarLabel.Text = "Create a new use case";
                 }
+                // Link
                 else if (rdiElementLine.Checked)
                 {
                     if (_selectedActor == null)
@@ -240,12 +333,14 @@ namespace UsecaseHelper
                     }
                 }
             }
+            // Delete hint
             else if (rdiModeDelete.Checked)
             {
                 Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y));
 
                 statusBarLabel.Text = selection != null ? $"Delete {selection.Name}" : "Ready";
             }
+            // Unlink hint
             else if (rdiModeUnlink.Checked)
             {
                 if (_selectedActor == null)
@@ -262,6 +357,7 @@ namespace UsecaseHelper
                         : $"Unlink {_selectedActor.Name} from {selection.Name}";
                 }
             }
+            // Select/move hint
             else if (rdiModeSelect.Checked)
             {
                 if (SelectedDrawable != null)
@@ -278,6 +374,14 @@ namespace UsecaseHelper
             }
         }
 
+        /// <summary>
+        ///     Clears all drawables.
+        /// </summary>
+        /// <param name="sender">The object that triggered this listener.</param>
+        /// <param name="e">
+        ///     Represents the base class for classes that contain event data, and provides a value to use for events that do not
+        ///     include event data.
+        /// </param>
         private void btnClearAll_Click(object sender, EventArgs e)
         {
             _drawables.Clear();
@@ -285,6 +389,14 @@ namespace UsecaseHelper
             imgDrawing.Invalidate();
         }
 
+        /// <summary>
+        ///     Exports current state as an image.
+        /// </summary>
+        /// <param name="sender">The object that triggered this listener.</param>
+        /// <param name="e">
+        ///     Represents the base class for classes that contain event data, and provides a value to use for events that do not
+        ///     include event data.
+        /// </param>
         private void btnExport_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog
@@ -304,6 +416,7 @@ namespace UsecaseHelper
 
                 statusBarLabel.Text = $"Exporting to {filename}...";
 
+                // Determine image format, depending on extension
                 switch (dialog.FileName.Split('.').Last())
                 {
                     default:
@@ -319,19 +432,30 @@ namespace UsecaseHelper
                         break;
                 }
 
+                // Create bitmap
                 Bitmap bitmap = new Bitmap(imgDrawing.Width, imgDrawing.Height, PixelFormat.Format32bppArgb);
                 Graphics g = Graphics.FromImage(bitmap);
 
                 g.Clear(Color.White);
 
+                // Draw to bitmap
                 Draw(g);
 
+                // Save to file
                 bitmap.Save(filename, imageFormat);
 
                 statusBarLabel.Text = "Ready";
             }
         }
 
+        /// <summary>
+        ///     Exports current state as a text file.
+        /// </summary>
+        /// <param name="sender">The object that triggered this listener.</param>
+        /// <param name="e">
+        ///     Represents the base class for classes that contain event data, and provides a value to use for events that do not
+        ///     include event data.
+        /// </param>
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog
@@ -350,18 +474,28 @@ namespace UsecaseHelper
 
                 statusBarLabel.Text = $"Saving to {filename}...";
 
+                // Serialize to json
                 string json = JsonConvert.SerializeObject(_drawables, new JsonSerializerSettings
                 {
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                     TypeNameHandling = TypeNameHandling.Auto
                 });
 
+                // Save to file
                 File.WriteAllText(filename, json);
 
                 statusBarLabel.Text = "Ready";
             }
         }
 
+        /// <summary>
+        ///     Load state from a text file.
+        /// </summary>
+        /// <param name="sender">The object that triggered this listener.</param>
+        /// <param name="e">
+        ///     Represents the base class for classes that contain event data, and provides a value to use for events that do not
+        ///     include event data.
+        /// </param>
         private void btnLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog
@@ -375,10 +509,12 @@ namespace UsecaseHelper
             {
                 statusBarLabel.Text = $"Loading from {dialog.FileName}...";
 
+                // Read from file
                 string json = File.ReadAllText(dialog.FileName);
 
                 try
                 {
+                    // Deserialize from json
                     List<Drawable> drawables = JsonConvert.DeserializeObject<List<Drawable>>(json,
                         new JsonSerializerSettings
                         {
