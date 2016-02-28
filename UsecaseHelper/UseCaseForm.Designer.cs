@@ -46,6 +46,7 @@ namespace UsecaseHelper
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblExceptions = new System.Windows.Forms.Label();
             this.lblResult = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblName
@@ -126,8 +127,8 @@ namespace UsecaseHelper
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirm.Location = new System.Drawing.Point(419, 308);
+            this.btnConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnConfirm.Location = new System.Drawing.Point(338, 308);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(75, 23);
             this.btnConfirm.TabIndex = 8;
@@ -189,12 +190,27 @@ namespace UsecaseHelper
             this.lblResult.TabIndex = 14;
             this.lblResult.Text = "Result:";
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(419, 308);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 15;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // UseCaseForm
             // 
+            this.AcceptButton = this.btnConfirm;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(506, 342);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.lblExceptions);
             this.Controls.Add(this.lblDescription);
@@ -234,5 +250,6 @@ namespace UsecaseHelper
         private Label lblDescription;
         private Label lblExceptions;
         private Label lblResult;
+        private Button btnCancel;
     }
 }

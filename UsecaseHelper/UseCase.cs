@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace UsecaseHelper
 {
@@ -108,15 +109,16 @@ namespace UsecaseHelper
             };
 
             // Show dialog
-            useCaseForm.ShowDialog();
-
-            // Get input from dialog
-            Name = useCaseForm.CaseName;
-            Assumptions = useCaseForm.Assumptions;
-            Description = useCaseForm.Description;
-            Exceptions = useCaseForm.Exceptions;
-            Result = useCaseForm.Result;
-            Summary = useCaseForm.Summary;
+            if (useCaseForm.ShowDialog() == DialogResult.OK)
+            {
+                // Get input from dialog
+                Name = useCaseForm.CaseName;
+                Assumptions = useCaseForm.Assumptions;
+                Description = useCaseForm.Description;
+                Exceptions = useCaseForm.Exceptions;
+                Result = useCaseForm.Result;
+                Summary = useCaseForm.Summary;
+            }
         }
 
         public override string ToString() => Name;
