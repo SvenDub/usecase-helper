@@ -51,8 +51,16 @@ namespace UsecaseHelper
 
         private void DrawablesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
-            int? right = _drawables.Max(drawable => new int?(drawable.Right + 25));
-            int? bottom = _drawables.Max(drawable => new int?(drawable.Bottom + 25));
+            ResizeCanvas();
+        }
+
+        /// <summary>
+        ///     Resizes the canvas.
+        /// </summary>
+        private void ResizeCanvas()
+        {
+            int? right = _drawables.Max(drawable => new int?(Math.Max(drawable.Right, drawable.GhostRight) + 25));
+            int? bottom = _drawables.Max(drawable => new int?(Math.Max(drawable.Bottom, drawable.GhostBottom) + 25));
 
             int width = right ?? 0;
             int height = bottom ?? 0;
@@ -351,6 +359,8 @@ namespace UsecaseHelper
             // Draw ghost
             if (SelectedDrawable != null)
             {
+                ResizeCanvas();
+
                 SelectedDrawable.GhostX = e.X;
                 SelectedDrawable.GhostY = e.Y;
                 imgDrawing.Invalidate();

@@ -110,6 +110,26 @@ namespace UsecaseHelper
         public int Bottom => (int) (Y + Height/2f);
 
         /// <summary>
+        ///     The x-coordinate of the left border of the ghost.
+        /// </summary>
+        public int GhostLeft => (int)(GhostX - Width / 2f);
+
+        /// <summary>
+        ///     The x-coordinate of the right border of the ghost.
+        /// </summary>
+        public int GhostRight => (int)(GhostX + Width / 2f);
+
+        /// <summary>
+        ///     The y-coordinate of the top border of the ghost.
+        /// </summary>
+        public int GhostTop => (int)(GhostY - Height / 2f);
+
+        /// <summary>
+        ///     The y-coordinate of the bottom border of the ghost.
+        /// </summary>
+        public int GhostBottom => (int)(GhostY + Height / 2f);
+
+        /// <summary>
         ///     Checks if the given coordinates are within the borders of this object.
         /// </summary>
         /// <param name="x">The x-coordinate.</param>
