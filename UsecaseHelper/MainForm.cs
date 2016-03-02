@@ -437,6 +437,13 @@ namespace UsecaseHelper
                         : $"Click to select {selection.Name} - Drag to move";
                 }
             }
+            // Paint hint
+            else if (rdiModePaint.Checked)
+            {
+                Drawable selection = _drawables.ToList().Find(drawable => drawable.InSelection(e.X, e.Y));
+
+                statusBarLabel.Text = selection != null ? $"Change color of {selection.Name}" : "Ready";
+            }
         }
 
         /// <summary>
