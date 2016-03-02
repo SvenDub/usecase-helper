@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace UsecaseHelper
@@ -69,11 +70,14 @@ namespace UsecaseHelper
         /// <param name="y">The y-coordinate of the top left corner.</param>
         private void DrawSelf(Graphics g, Pen pen, Brush brush, int x, int y)
         {
+            int sourceX = x + Width / 2;
+            int sourceY = y + Height / 2;
+
             // Draw border
             g.DrawEllipse(pen, x, y, Width, Height);
 
             // Draw name
-            g.DrawString(Name, Font, brush, x + Width/2 - TextSize.Width/2, y + Height/2 - TextSize.Height/2);
+            g.DrawString(Name, Font, brush, sourceX - TextSize.Width/2, sourceY - TextSize.Height/2);
 
             // Draw lines to all actors
             Actors.ForEach(actor =>
@@ -87,7 +91,10 @@ namespace UsecaseHelper
                     targetY = actor.GhostY + Height/2;
                 }
 
-                g.DrawLine(pen, x + Width/2, y + Height/2, targetX, targetY);
+
+                Brush gradientBrush = new LinearGradientBrush(new Point(targetX, targetY), new Point(sourceX, sourceY), actor.Color, Color);
+
+                g.DrawLine(new Pen(gradientBrush), sourceX, sourceY, targetX, targetY);
             });
         }
 

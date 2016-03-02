@@ -11,27 +11,43 @@ namespace UsecaseHelper
         /// <summary>
         ///     The brush to use when drawing in normal mode.
         /// </summary>
-        protected readonly Brush Brush = Brushes.Black;
+        protected Brush Brush { get; set; } = Brushes.Black;
 
         /// <summary>
         ///     The brush to use when drawing in ghost mode.
         /// </summary>
-        protected readonly Brush BrushGhost = Brushes.Black;
+        protected Brush BrushGhost { get; set; } = Brushes.Black;
 
         /// <summary>
         ///     The font to use for drawing the name.
         /// </summary>
-        protected readonly Font Font = new Font(FontFamily.GenericMonospace, 10);
+        protected Font Font { get; set; } = new Font(FontFamily.GenericMonospace, 10);
 
         /// <summary>
         ///     The pen to use when drawing in normal mode.
         /// </summary>
-        protected readonly Pen Pen = Pens.Black;
+        protected Pen Pen { get; set; } = Pens.Black;
 
         /// <summary>
         ///     The pen to use when drawing in ghost mode.
         /// </summary>
-        protected readonly Pen PenGhost = Pens.Black;
+        protected Pen PenGhost { get; set; } = Pens.Black;
+
+        /// <summary>
+        ///     The color to use for drawing.
+        /// </summary>
+        public Color Color
+        {
+            get { return Pen.Color; }
+            set
+            {
+                Pen = new Pen(value);
+                PenGhost = Pen;
+
+                Brush = new SolidBrush(value);
+                BrushGhost = Brush;
+            }
+        }
 
         /// <summary>
         ///     The x-coordinate of the center.
@@ -92,6 +108,26 @@ namespace UsecaseHelper
         ///     The y-coordinate of the bottom border.
         /// </summary>
         public int Bottom => (int) (Y + Height/2f);
+
+        /// <summary>
+        ///     The x-coordinate of the left border of the ghost.
+        /// </summary>
+        public int GhostLeft => (int)(GhostX - Width / 2f);
+
+        /// <summary>
+        ///     The x-coordinate of the right border of the ghost.
+        /// </summary>
+        public int GhostRight => (int)(GhostX + Width / 2f);
+
+        /// <summary>
+        ///     The y-coordinate of the top border of the ghost.
+        /// </summary>
+        public int GhostTop => (int)(GhostY - Height / 2f);
+
+        /// <summary>
+        ///     The y-coordinate of the bottom border of the ghost.
+        /// </summary>
+        public int GhostBottom => (int)(GhostY + Height / 2f);
 
         /// <summary>
         ///     Checks if the given coordinates are within the borders of this object.

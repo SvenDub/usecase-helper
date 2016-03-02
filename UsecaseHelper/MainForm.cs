@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
@@ -27,7 +31,7 @@ namespace UsecaseHelper
         /// <summary>
         ///     List of all drawables currently on the canvas.
         /// </summary>
-        private readonly List<Drawable> _drawables = new List<Drawable>();
+        private readonly ObservableCollection<Drawable> _drawables = new ObservableCollection<Drawable>();
 
         /// <summary>
         ///     The actor that is selected for linking purposes.
@@ -37,6 +41,34 @@ namespace UsecaseHelper
         public MainForm()
         {
             InitializeComponent();
+
+            _drawables.CollectionChanged += DrawablesOnCollectionChanged;
+
+            // Not set in designer because a control 
+            imgDrawing.Width = 0;
+            imgDrawing.Height = 0;
+        }
+
+        private void DrawablesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            ResizeCanvas();
+        }
+
+        /// <summary>
+        ///     Resizes the canvas.
+        /// </summary>
+        private void ResizeCanvas()
+        {
+            int? right = _drawables.Max(drawable => new int?(Math.Max(drawable.Right, drawable.GhostRight) + 25));
+            int? bottom = _drawables.Max(drawable => new int?(Math.Max(drawable.Bottom, drawable.GhostBottom) + 25));
+
+            int width = right ?? 0;
+            int height = bottom ?? 0;
+
+            imgDrawing.Width = width;
+            imgDrawing.Height = height;
+
+            imgDrawing.Invalidate();
         }
 
         /// <summary>
@@ -55,7 +87,7 @@ namespace UsecaseHelper
         /// <param name="g">The drawing surface to draw to.</param>
         private void Draw(Graphics g)
         {
-            _drawables.ForEach(drawable =>
+            _drawables.ToList().ForEach(drawable =>
             {
                 if (drawable == SelectedDrawable)
                 {
@@ -93,6 +125,10 @@ namespace UsecaseHelper
             else if (rdiModeUnlink.Checked)
             {
                 UnlinkObject(e.X, e.Y);
+            }
+            else if (rdiModePaint.Checked)
+            {
+                PaintObject(e.X, e.Y);
             }
         }
 
@@ -144,7 +180,7 @@ namespace UsecaseHelper
                 if (_selectedActor == null)
                 {
                     Actor selection =
-                        _drawables.FindAll(drawable => drawable is Actor).Find(actor => actor.InSelection(x, y)) as
+                        _drawables.ToList().FindAll(drawable => drawable is Actor).Find(actor => actor.InSelection(x, y)) as
                             Actor;
                     if (selection == null)
                     {
@@ -158,7 +194,7 @@ namespace UsecaseHelper
                 else
                 {
                     UseCase selection =
-                        _drawables.FindAll(drawable => drawable is UseCase).Find(useCase => useCase.InSelection(x, y))
+                        _drawables.ToList().FindAll(drawable => drawable is UseCase).Find(useCase => useCase.InSelection(x, y))
                             as UseCase;
                     if (selection == null)
                     {
@@ -182,7 +218,7 @@ namespace UsecaseHelper
         /// <param name="y">The y-coordinate.</param>
         private void EditObject(int x, int y)
         {
-            Drawable selection = _drawables.Find(drawable => drawable.InSelection(x, y));
+            Drawable selection = _drawables.ToList().Find(drawable => drawable.InSelection(x, y));
             selection?.Edit();
 
             imgDrawing.Invalidate();
@@ -195,14 +231,14 @@ namespace UsecaseHelper
         /// <param name="y">The y-coordinate.</param>
         private void DeleteObject(int x, int y)
         {
-            List<Drawable> deleteList = _drawables.FindAll(drawable => drawable.InSelection(x, y));
+            List<Drawable> deleteList = _drawables.ToList().FindAll(drawable => drawable.InSelection(x, y));
 
-            _drawables.FindAll(drawable => drawable is UseCase)
+            _drawables.ToList().FindAll(drawable => drawable is UseCase)
                 .Cast<UseCase>()
                 .ToList()
                 .ForEach(useCase => useCase.Actors.RemoveAll(actor => deleteList.Contains(actor)));
 
-            _drawables.RemoveAll(drawable => deleteList.Contains(drawable));
+            deleteList.ForEach(drawable => _drawables.Remove(drawable));
 
             imgDrawing.Invalidate();
         }
@@ -217,7 +253,7 @@ namespace UsecaseHelper
             if (_selectedActor == null)
             {
                 Actor selection =
-                    _drawables.FindAll(drawable => drawable is Actor).Find(actor => actor.InSelection(x, y)) as Actor;
+                    _drawables.ToList().FindAll(drawable => drawable is Actor).Find(actor => actor.InSelection(x, y)) as Actor;
                 if (selection == null)
                 {
                     MessageBox.Show("Select an actor");
@@ -230,7 +266,7 @@ namespace UsecaseHelper
             else
             {
                 UseCase selection =
-                    _drawables.FindAll(drawable => drawable is UseCase).Find(useCase => useCase.InSelection(x, y)) as
+                    _drawables.ToList().FindAll(drawable => drawable is UseCase).Find(useCase => useCase.InSelection(x, y)) as
                         UseCase;
                 if (selection == null)
                 {
@@ -247,6 +283,28 @@ namespace UsecaseHelper
         }
 
         /// <summary>
+        ///     Paint the object at the given coordinates.
+        /// </summary>
+        /// <param name="x">The x-coordinate.</param>
+        /// <param name="y">The y-coordinate.</param>
+        private void PaintObject(int x, int y)
+        {
+            Drawable selection = _drawables.ToList().Find(drawable => drawable.InSelection(x, y));
+
+            if (selection != null)
+            {
+                ColorDialog dialog = new ColorDialog();
+
+                if (dialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    selection.Color = dialog.Color;
+                }
+            }
+
+            imgDrawing.Invalidate();
+        }
+
+        /// <summary>
         ///     Selects an object for dragging.
         /// </summary>
         /// <param name="sender">The object that triggered this listener.</param>
@@ -256,7 +314,7 @@ namespace UsecaseHelper
         /// </param>
         private void imgDrawing_MouseDown(object sender, MouseEventArgs e)
         {
-            SelectedDrawable = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y));
+            SelectedDrawable = _drawables.ToList().Find(drawable => drawable.InSelection(e.X, e.Y));
         }
 
         /// <summary>
@@ -301,6 +359,8 @@ namespace UsecaseHelper
             // Draw ghost
             if (SelectedDrawable != null)
             {
+                ResizeCanvas();
+
                 SelectedDrawable.GhostX = e.X;
                 SelectedDrawable.GhostY = e.Y;
                 imgDrawing.Invalidate();
@@ -325,13 +385,13 @@ namespace UsecaseHelper
                     if (_selectedActor == null)
                     {
                         Drawable selection =
-                            _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is Actor);
+                            _drawables.ToList().Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is Actor);
                         statusBarLabel.Text = selection == null ? "Select an actor" : $"Link {selection.Name}";
                     }
                     else
                     {
                         Drawable selection =
-                            _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is UseCase);
+                            _drawables.ToList().Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is UseCase);
                         statusBarLabel.Text = selection == null
                             ? "Select a use case"
                             : $"Link {_selectedActor.Name} to {selection.Name}";
@@ -341,7 +401,7 @@ namespace UsecaseHelper
             // Delete hint
             else if (rdiModeDelete.Checked)
             {
-                Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y));
+                Drawable selection = _drawables.ToList().Find(drawable => drawable.InSelection(e.X, e.Y));
 
                 statusBarLabel.Text = selection != null ? $"Delete {selection.Name}" : "Ready";
             }
@@ -350,13 +410,13 @@ namespace UsecaseHelper
             {
                 if (_selectedActor == null)
                 {
-                    Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is Actor);
+                    Drawable selection = _drawables.ToList().Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is Actor);
                     statusBarLabel.Text = selection == null ? "Select an actor" : $"Unlink {selection.Name}";
                 }
                 else
                 {
                     Drawable selection =
-                        _drawables.Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is UseCase);
+                        _drawables.ToList().Find(drawable => drawable.InSelection(e.X, e.Y) && drawable is UseCase);
                     statusBarLabel.Text = selection == null
                         ? "Select a use case"
                         : $"Unlink {_selectedActor.Name} from {selection.Name}";
@@ -371,11 +431,18 @@ namespace UsecaseHelper
                 }
                 else
                 {
-                    Drawable selection = _drawables.Find(drawable => drawable.InSelection(e.X, e.Y));
+                    Drawable selection = _drawables.ToList().Find(drawable => drawable.InSelection(e.X, e.Y));
                     statusBarLabel.Text = selection == null
                         ? "Ready"
                         : $"Click to select {selection.Name} - Drag to move";
                 }
+            }
+            // Paint hint
+            else if (rdiModePaint.Checked)
+            {
+                Drawable selection = _drawables.ToList().Find(drawable => drawable.InSelection(e.X, e.Y));
+
+                statusBarLabel.Text = selection != null ? $"Change color of {selection.Name}" : "Ready";
             }
         }
 
@@ -528,7 +595,7 @@ namespace UsecaseHelper
                         });
 
                     _drawables.Clear();
-                    _drawables.AddRange(drawables);
+                    drawables.ForEach(drawable => _drawables.Add(drawable));
 
                     statusBarLabel.Text = "Ready";
 
