@@ -11,27 +11,43 @@ namespace UsecaseHelper
         /// <summary>
         ///     The brush to use when drawing in normal mode.
         /// </summary>
-        protected readonly Brush Brush = Brushes.Black;
+        protected Brush Brush { get; set; } = Brushes.Black;
 
         /// <summary>
         ///     The brush to use when drawing in ghost mode.
         /// </summary>
-        protected readonly Brush BrushGhost = Brushes.Black;
+        protected Brush BrushGhost { get; set; } = Brushes.Black;
 
         /// <summary>
         ///     The font to use for drawing the name.
         /// </summary>
-        protected readonly Font Font = new Font(FontFamily.GenericMonospace, 10);
+        protected Font Font { get; set; } = new Font(FontFamily.GenericMonospace, 10);
 
         /// <summary>
         ///     The pen to use when drawing in normal mode.
         /// </summary>
-        protected readonly Pen Pen = Pens.Black;
+        protected Pen Pen { get; set; } = Pens.Black;
 
         /// <summary>
         ///     The pen to use when drawing in ghost mode.
         /// </summary>
-        protected readonly Pen PenGhost = Pens.Black;
+        protected Pen PenGhost { get; set; } = Pens.Black;
+
+        /// <summary>
+        ///     The color to use for drawing.
+        /// </summary>
+        public virtual Color Color
+        {
+            get { return Pen.Color; }
+            set
+            {
+                Pen = new Pen(value);
+                PenGhost = Pen;
+
+                Brush = new SolidBrush(value);
+                BrushGhost = Brush;
+            }
+        }
 
         /// <summary>
         ///     The x-coordinate of the center.

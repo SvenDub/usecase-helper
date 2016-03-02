@@ -94,6 +94,10 @@ namespace UsecaseHelper
             {
                 UnlinkObject(e.X, e.Y);
             }
+            else if (rdiModePaint.Checked)
+            {
+                PaintObject(e.X, e.Y);
+            }
         }
 
         /// <summary>
@@ -240,6 +244,28 @@ namespace UsecaseHelper
                 {
                     selection.Actors.Remove(_selectedActor);
                     _selectedActor = null;
+                }
+            }
+
+            imgDrawing.Invalidate();
+        }
+
+        /// <summary>
+        ///     Paint the object at the given coordinates.
+        /// </summary>
+        /// <param name="x">The x-coordinate.</param>
+        /// <param name="y">The y-coordinate.</param>
+        private void PaintObject(int x, int y)
+        {
+            Drawable selection = _drawables.Find(drawable => drawable.InSelection(x, y));
+
+            if (selection != null)
+            {
+                ColorDialog dialog = new ColorDialog();
+
+                if (dialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    selection.Color = dialog.Color;
                 }
             }
 

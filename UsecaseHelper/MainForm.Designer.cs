@@ -49,6 +49,7 @@ namespace UsecaseHelper
             this.imgDrawing = new System.Windows.Forms.PictureBox();
             this.statusBar = new System.Windows.Forms.StatusStrip();
             this.statusBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.rdiModePaint = new System.Windows.Forms.RadioButton();
             this.pnlControls.SuspendLayout();
             this.gbxMode.SuspendLayout();
             this.gbxElement.SuspendLayout();
@@ -69,7 +70,7 @@ namespace UsecaseHelper
             this.pnlControls.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlControls.Location = new System.Drawing.Point(0, 0);
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(652, 132);
+            this.pnlControls.Size = new System.Drawing.Size(652, 161);
             this.pnlControls.TabIndex = 0;
             // 
             // btnLoad
@@ -123,10 +124,11 @@ namespace UsecaseHelper
             this.gbxMode.Controls.Add(this.rdiModeUnlink);
             this.gbxMode.Controls.Add(this.rdiModeDelete);
             this.gbxMode.Controls.Add(this.rdiModeSelect);
+            this.gbxMode.Controls.Add(this.rdiModePaint);
             this.gbxMode.Controls.Add(this.rdiModeCreate);
             this.gbxMode.Location = new System.Drawing.Point(168, 12);
             this.gbxMode.Name = "gbxMode";
-            this.gbxMode.Size = new System.Drawing.Size(150, 114);
+            this.gbxMode.Size = new System.Drawing.Size(150, 143);
             this.gbxMode.TabIndex = 1;
             this.gbxMode.TabStop = false;
             this.gbxMode.Text = "Mode";
@@ -138,7 +140,6 @@ namespace UsecaseHelper
             this.rdiModeUnlink.Name = "rdiModeUnlink";
             this.rdiModeUnlink.Size = new System.Drawing.Size(55, 17);
             this.rdiModeUnlink.TabIndex = 3;
-            this.rdiModeUnlink.TabStop = true;
             this.rdiModeUnlink.Text = "Unlink";
             this.rdiModeUnlink.UseVisualStyleBackColor = true;
             // 
@@ -149,7 +150,6 @@ namespace UsecaseHelper
             this.rdiModeDelete.Name = "rdiModeDelete";
             this.rdiModeDelete.Size = new System.Drawing.Size(56, 17);
             this.rdiModeDelete.TabIndex = 2;
-            this.rdiModeDelete.TabStop = true;
             this.rdiModeDelete.Text = "Delete";
             this.rdiModeDelete.UseVisualStyleBackColor = true;
             // 
@@ -160,7 +160,6 @@ namespace UsecaseHelper
             this.rdiModeSelect.Name = "rdiModeSelect";
             this.rdiModeSelect.Size = new System.Drawing.Size(55, 17);
             this.rdiModeSelect.TabIndex = 1;
-            this.rdiModeSelect.TabStop = true;
             this.rdiModeSelect.Text = "Select";
             this.rdiModeSelect.UseVisualStyleBackColor = true;
             // 
@@ -172,7 +171,6 @@ namespace UsecaseHelper
             this.rdiModeCreate.Name = "rdiModeCreate";
             this.rdiModeCreate.Size = new System.Drawing.Size(56, 17);
             this.rdiModeCreate.TabIndex = 0;
-            this.rdiModeCreate.TabStop = true;
             this.rdiModeCreate.Text = "Create";
             this.rdiModeCreate.UseVisualStyleBackColor = true;
             // 
@@ -185,7 +183,7 @@ namespace UsecaseHelper
             this.gbxElement.Controls.Add(this.rdiElementActor);
             this.gbxElement.Location = new System.Drawing.Point(12, 12);
             this.gbxElement.Name = "gbxElement";
-            this.gbxElement.Size = new System.Drawing.Size(150, 114);
+            this.gbxElement.Size = new System.Drawing.Size(150, 143);
             this.gbxElement.TabIndex = 0;
             this.gbxElement.TabStop = false;
             this.gbxElement.Text = "Element";
@@ -229,9 +227,9 @@ namespace UsecaseHelper
             this.pnlContent.Controls.Add(this.imgDrawing);
             this.pnlContent.Controls.Add(this.statusBar);
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContent.Location = new System.Drawing.Point(0, 132);
+            this.pnlContent.Location = new System.Drawing.Point(0, 161);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(652, 354);
+            this.pnlContent.Size = new System.Drawing.Size(652, 325);
             this.pnlContent.TabIndex = 1;
             // 
             // imgDrawing
@@ -240,7 +238,7 @@ namespace UsecaseHelper
             this.imgDrawing.Dock = System.Windows.Forms.DockStyle.Fill;
             this.imgDrawing.Location = new System.Drawing.Point(0, 0);
             this.imgDrawing.Name = "imgDrawing";
-            this.imgDrawing.Size = new System.Drawing.Size(652, 332);
+            this.imgDrawing.Size = new System.Drawing.Size(652, 303);
             this.imgDrawing.TabIndex = 1;
             this.imgDrawing.TabStop = false;
             this.imgDrawing.Paint += new System.Windows.Forms.PaintEventHandler(this.imgDrawing_Paint);
@@ -255,7 +253,7 @@ namespace UsecaseHelper
             this.statusBar.BackColor = System.Drawing.SystemColors.Window;
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusBarLabel});
-            this.statusBar.Location = new System.Drawing.Point(0, 332);
+            this.statusBar.Location = new System.Drawing.Point(0, 303);
             this.statusBar.Name = "statusBar";
             this.statusBar.Size = new System.Drawing.Size(652, 22);
             this.statusBar.TabIndex = 0;
@@ -266,6 +264,16 @@ namespace UsecaseHelper
             this.statusBarLabel.Name = "statusBarLabel";
             this.statusBarLabel.Size = new System.Drawing.Size(39, 17);
             this.statusBarLabel.Text = "Ready";
+            // 
+            // rdiModePaint
+            // 
+            this.rdiModePaint.AutoSize = true;
+            this.rdiModePaint.Location = new System.Drawing.Point(7, 112);
+            this.rdiModePaint.Name = "rdiModePaint";
+            this.rdiModePaint.Size = new System.Drawing.Size(49, 17);
+            this.rdiModePaint.TabIndex = 0;
+            this.rdiModePaint.Text = "Paint";
+            this.rdiModePaint.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -310,6 +318,7 @@ namespace UsecaseHelper
         private Button btnExport;
         private Button btnSave;
         private Button btnLoad;
+        private RadioButton rdiModePaint;
     }
 }
 
