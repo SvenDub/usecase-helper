@@ -36,7 +36,7 @@ namespace UsecaseHelper
         /// <summary>
         ///     The color to use for drawing.
         /// </summary>
-        public virtual Color Color
+        public Color Color
         {
             get { return Pen.Color; }
             set
